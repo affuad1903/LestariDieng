@@ -12,8 +12,10 @@ class PageController extends Controller
     public function destinasiIndex(){
         return view('page.destinasi.index');
     }
-    public function destinasiShow(){
-        return view('page.destinasi.show');
+    public function destinasiShow($id){
+        $destination = Destination::with(['destination_section', 'destination_uniq'])->findOrFail($id);
+        $destinationAll = Destination::all();
+        return view('page.destinasi.show', compact('destination', 'destinationAll'));
     }
     public function paketIndex(){
         return view('page.paket.index');

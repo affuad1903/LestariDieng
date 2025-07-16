@@ -40,7 +40,7 @@ Route::get('/home', function () {
 
 Route::get('/', [PageController::class,'homeIndex']);
 Route::get('/destinasi-index', [PageController::class,'destinasiIndex']);
-Route::get('/destinasi-show', [PageController::class,'destinasiShow']);
+Route::get('/destinasi-show/{id}', [PageController::class,'destinasiShow']);
 Route::get('/paket-index', [PageController::class,'paketIndex']);
 Route::get('/paket-show', [PageController::class,'paketShow']);
 Route::get('/paket-jeep-index', [PageController::class,'paketJeepIndex']);
