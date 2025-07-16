@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Flash Messages High Contrast</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.0.96/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="css/admin/flash-messages.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+            padding: 2rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-header {
+            background: #343a40;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h2>Test Flash Messages - High Contrast Colors</h2>
+            <p>Testing kontras warna yang sangat tinggi untuk visibility optimal</p>
+        </div>
+
+        <!-- Success Alert -->
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="d-flex align-items-start">
+                <div class="success-icon me-3">
+                    <i class="mdi mdi-check-circle"></i>
+                </div>
+                <div class="success-content flex-grow-1">
+                    <h6 class="mb-1 fw-bold">Berhasil!</h6>
+                    <p class="mb-0">Data berhasil disimpan dengan sempurna. Semua informasi telah tersimpan ke database.</p>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <!-- Error Alert -->
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="d-flex align-items-start">
+                <div class="error-icon me-3">
+                    <i class="mdi mdi-alert-circle"></i>
+                </div>
+                <div class="error-content flex-grow-1">
+                    <h6 class="mb-1 fw-bold">Terjadi Kesalahan!</h6>
+                    <p class="mb-0">Koneksi ke server gagal. Silakan periksa koneksi internet Anda dan coba lagi.</p>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <!-- Info Alert -->
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <div class="d-flex align-items-start">
+                <div class="info-icon me-3">
+                    <i class="mdi mdi-information"></i>
+                </div>
+                <div class="info-content flex-grow-1">
+                    <h6 class="mb-1 fw-bold">Informasi Penting</h6>
+                    <p class="mb-0">Sistem akan menjalani maintenance rutin pada hari Minggu jam 02:00 - 04:00 WIB.</p>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <!-- Warning Alert -->
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div class="d-flex align-items-start">
+                <div class="warning-icon me-3">
+                    <i class="mdi mdi-alert"></i>
+                </div>
+                <div class="warning-content flex-grow-1">
+                    <h6 class="mb-1 fw-bold">Peringatan Keamanan!</h6>
+                    <p class="mb-0">Password Anda akan kedaluwarsa dalam 3 hari. Harap perbarui password untuk keamanan akun.</p>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <!-- Validation Errors -->
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="d-flex align-items-start">
+                <div class="error-icon me-3">
+                    <i class="mdi mdi-alert-circle"></i>
+                </div>
+                <div class="error-content flex-grow-1">
+                    <h6 class="mb-1 fw-bold">Kesalahan Validasi Form!</h6>
+                    <ul class="mb-0 ps-3">
+                        <li>Field nama wajib diisi dan minimal 3 karakter</li>
+                        <li>Email harus dalam format yang valid (contoh: user@domain.com)</li>
+                        <li>Password minimal 8 karakter dengan kombinasi huruf dan angka</li>
+                        <li>Konfirmasi password harus sama dengan password</li>
+                        <li>Nomor telepon harus berupa angka dan minimal 10 digit</li>
+                    </ul>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class="mt-4 p-3 bg-white rounded border">
+            <h5>Catatan Testing:</h5>
+            <ul>
+                <li><strong>Success:</strong> Background hijau terang (#e8f5e9) dengan teks hijau sangat gelap (#1b5e20)</li>
+                <li><strong>Error:</strong> Background merah terang (#ffebee) dengan teks merah sangat gelap (#b71c1c)</li>
+                <li><strong>Info:</strong> Background biru terang (#e3f2fd) dengan teks biru sangat gelap (#0d47a1)</li>
+                <li><strong>Warning:</strong> Background orange terang (#fff3e0) dengan teks orange sangat gelap (#e65100)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

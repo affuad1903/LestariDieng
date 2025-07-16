@@ -1,0 +1,340 @@
+/* Modern Form Styling for Social Media */
+.form-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border: none;
+    overflow: hidden;
+}
+
+.form-header {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding: 1.5rem 2rem;
+}
+
+.form-header h4 {
+    color: white;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.form-body {
+    background: white;
+    padding: 2.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.8rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.form-label i {
+    color: #667eea;
+    margin-right: 8px;
+}
+
+.form-control {
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: white;
+}
+
+.form-select {
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+    background-image: none;
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23667eea' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px 12px;
+}
+
+.form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: white;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23667eea' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px 12px;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.input-group:focus-within {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: white;
+}
+
+.input-group-icon {
+    padding: 12px 16px;
+    color: #667eea;
+    font-size: 1.1rem;
+    background: transparent;
+    border: none;
+    flex-shrink: 0;
+}
+
+.input-group .form-control {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    padding-left: 0;
+    flex: 1;
+}
+
+.input-group .form-control:focus {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    outline: none;
+}
+
+.btn-auto-fill {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 0 10px 10px 0;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.btn-auto-fill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+    color: white;
+}
+
+.btn-auto-fill:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.2);
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 2rem;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
+.alert-custom {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-top: 0.5rem;
+    background: #fed7d7;
+    color: #c53030;
+    font-size: 0.85rem;
+}
+
+.url-preview {
+    background: #f0f4f8;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: #4a5568;
+    font-family: 'Courier New', monospace;
+}
+
+.platform-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+/* Platform specific colors */
+.platform-facebook { color: #1877F2; }
+.platform-instagram { color: #E4405F; }
+.platform-twitter { color: #1DA1F2; }
+.platform-youtube { color: #FF0000; }
+.platform-linkedin { color: #0A66C2; }
+.platform-tiktok { color: #000000; }
+.platform-whatsapp { color: #25D366; }
+
+/* Animation Effects */
+.form-group {
+    transition: transform 0.2s ease;
+}
+
+.form-group:hover {
+    transform: translateY(-1px);
+}
+
+/* Loading state */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-body {
+        padding: 1.5rem;
+    }
+    
+    .form-header {
+        padding: 1rem 1.5rem;
+    }
+    
+    .form-header h4 {
+        font-size: 1.1rem;
+    }
+    
+    .btn-auto-fill {
+        margin-left: 0;
+        margin-top: 8px;
+        width: 100%;
+    }
+}
+
+/* Icon preview styling */
+.icon-preview {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+/* Fix for zigzag patterns and ensure clean styling */
+.form-select option {
+    background: white;
+    color: #2d3748;
+    padding: 8px 12px;
+}
+
+.form-control,
+.form-select {
+    background-image: none !important;
+    background-repeat: no-repeat !important;
+}
+
+.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23667eea' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 16px 12px !important;
+}
+
+/* Username group specific styling */
+.username-group .input-group {
+    width: 100%;
+}
+
+.username-group .btn-auto-fill {
+    border-left: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+/* Ensure no conflicting background patterns */
+*[class*="form-"] {
+    background-image: none;
+}
+
+.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23667eea' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e") !important;
+}
+
+/* Override any Bootstrap or conflicting styles */
+.socmed-form .form-select,
+.socmed-form .form-control {
+    background: #f8fafc !important;
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+}
+
+.socmed-form .form-select:focus,
+.socmed-form .form-control:focus {
+    background: white !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+.socmed-form .input-group {
+    background: #f8fafc !important;
+    border: 2px solid #e2e8f0 !important;
+}
+
+.socmed-form .input-group:focus-within {
+    background: white !important;
+    border-color: #667eea !important;
+}

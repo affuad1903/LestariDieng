@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Messages Test - High Contrast</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.0.96/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="css/admin/flash-messages.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .test-section {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+        }
+    </style>
+</head>
+<body class="p-4">
+    <div class="container">
+        <h1 class="mb-4">Flash Messages Test - High Contrast</h1>
+        
+        <div class="test-section">
+            <h3>Background Putih</h3>
+            <!-- Success Alert -->
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <div class="d-flex align-items-start">
+                    <div class="success-icon me-3">
+                        <i class="mdi mdi-check-circle"></i>
+                    </div>
+                    <div class="success-content flex-grow-1">
+                        <h6 class="mb-1 fw-bold">Berhasil!</h6>
+                        <p class="mb-0">Data telah berhasil disimpan ke database dengan sempurna.</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <!-- Error Alert -->
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="d-flex align-items-start">
+                    <div class="error-icon me-3">
+                        <i class="mdi mdi-alert-circle"></i>
+                    </div>
+                    <div class="error-content flex-grow-1">
+                        <h6 class="mb-1 fw-bold">Terjadi Kesalahan!</h6>
+                        <p class="mb-0">Tidak dapat menghubungi server. Silakan coba lagi.</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <!-- Info Alert -->
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <div class="d-flex align-items-start">
+                    <div class="info-icon me-3">
+                        <i class="mdi mdi-information"></i>
+                    </div>
+                    <div class="info-content flex-grow-1">
+                        <h6 class="mb-1 fw-bold">Informasi</h6>
+                        <p class="mb-0">Sistem akan maintenance pada jam 2 pagi.</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <!-- Warning Alert -->
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <div class="d-flex align-items-start">
+                    <div class="warning-icon me-3">
+                        <i class="mdi mdi-alert"></i>
+                    </div>
+                    <div class="warning-content flex-grow-1">
+                        <h6 class="mb-1 fw-bold">Peringatan!</h6>
+                        <p class="mb-0">Password Anda akan expire dalam 3 hari. Silakan update segera.</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <!-- Validation Errors -->
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="d-flex align-items-start">
+                    <div class="error-icon me-3">
+                        <i class="mdi mdi-alert-circle"></i>
+                    </div>
+                    <div class="error-content flex-grow-1">
+                        <h6 class="mb-1 fw-bold">Terjadi Kesalahan Validasi!</h6>
+                        <ul class="mb-0 ps-3">
+                            <li>Field nama harus diisi</li>
+                            <li>Field email harus format yang valid</li>
+                            <li>Password minimal 8 karakter</li>
+                            <li>Konfirmasi password tidak sama</li>
+                        </ul>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+
+        <div class="test-section" style="background: #343a40; color: white;">
+            <h3 style="color: white;">Background Gelap</h3>
+            <!-- Success Alert -->
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <div class="d-flex align-items-start">
+                    <div class="success-icon me-3">
+                        <i class="mdi mdi-check-circle"></i>
+                    </div>
+                    <div class="success-content flex-grow-1">
+                        <h6 class="mb-1 fw-bold">Berhasil!</h6>
+                        <p class="mb-0">Data telah berhasil disimpan ke database dengan sempurna.</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <!-- Error Alert -->
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="d-flex align-items-start">
+                    <div class="error-icon me-3">
+                        <i class="mdi mdi-alert-circle"></i>
+                    </div>
+                    <div class="error-content flex-grow-1">
+                        <h6 class="mb-1 fw-bold">Terjadi Kesalahan!</h6>
+                        <p class="mb-0">Tidak dapat menghubungi server. Silakan coba lagi.</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
