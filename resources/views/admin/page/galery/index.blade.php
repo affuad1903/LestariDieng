@@ -36,7 +36,7 @@
                 <i class="mdi mdi-image"></i>
             </div>
             <div class="stats-content">
-                <h3>{{ $galery->sum(function($item) { return $item->galery_img->count(); }) }}</h3>
+                <h3>{{ $galery->sum(fn($item) => $item->galery_img->count()) }}</h3>
                 <p>Total Foto</p>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 <i class="mdi mdi-check-circle"></i>
             </div>
             <div class="stats-content">
-                <h3>{{ $galery->filter(function($item) { return $item->galery_img->count() > 0; })->count() }}</h3>
+                <h3>{{ $galery->filter(fn($item) => $item->galery_img->count() > 0)->count() }}</h3>
                 <p>Dengan Foto</p>
             </div>
         </div>
@@ -78,121 +78,91 @@
     <div class="card-body">
         <div class="row">
             @forelse ($galery as $item)
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100 gallery-card">
-                    <div class="gallery-image-container">
-                        @php
-                            $firstImage = $item->galery_img->first();
-                            $imageCount = $item->galery_img->count();
-                        @endphp
-                        @if ($firstImage)
-                            <img src="{{ asset('image/galery/' . $item->id . '/' . $firstImage->image) }}" 
-                                 class="card-img-top gallery-image" 
-                                 alt="{{ $item->title }}"
-                                 data-bs-toggle="modal" 
-                                 data-bs-target="#imageModal"
-                                 onclick="showImage(this.src, '{{ $item->title }}')">
-                        @else
-                            <div class="gallery-placeholder">
-                                <i class="mdi mdi-image-off text-muted"></i>
-                                <p class="text-muted mb-0">Tidak ada gambar</p>
-                            </div>
-                        @endif
-                        
-                        @if($imageCount > 1)
-                            <div class="gallery-badge">
-                                <i class="mdi mdi-image-multiple me-1"></i>{{ $imageCount }}
-                            </div>
-                        @endif
-                    </div>
-                    
-                    <div class="card-body d-flex flex-column">
-                        <h6 class="card-title gallery-title" title="{{ $item->title }}">
-                            {{ $item->title }}
-                        </h6>
-                        
-                        <p class="card-text text-muted gallery-description">
-                            {{ Str::limit($item->description, 100) }}
-                        </p>
-                        
-                        <div class="gallery-meta mb-3">
-                            <div class="row text-center">
-                                <div class="col-6">
-                                    <i class="mdi mdi-image text-primary"></i>
-                                    <div class="small text-muted">{{ $imageCount }} Foto</div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100 gallery-card">
+                        <div class="gallery-image-container">
+                            @php
+                                $firstImage = $item->galery_img->first();
+                                $imageCount = $item->galery_img->count();
+                            @endphp
+                            @if ($firstImage)
+                                <img src="{{ asset('image/galery/' . $item->id . '/' . $firstImage->image) }}" 
+                                     class="card-img-top gallery-image" 
+                                     alt="{{ $item->title }}"
+                                     data-bs-toggle="modal" 
+                                     data-bs-target="#imageModal"
+                                     onclick="showImage(this.src, '{{ $item->title }}')">
+                            @else
+                                <div class="gallery-placeholder">
+                                    <i class="mdi mdi-image-off text-muted"></i>
+                                    <p class="text-muted mb-0">Tidak ada gambar</p>
                                 </div>
-                                <div class="col-6">
-                                    <i class="mdi mdi-calendar text-success"></i>
-                                    <div class="small text-muted">{{ $item->created_at->format('M Y') }}</div>
+                            @endif
+
+                            @if($imageCount > 1)
+                                <div class="gallery-badge">
+                                    <i class="mdi mdi-image-multiple me-1"></i>{{ $imageCount }}
                                 </div>
-                            </div>
+                            @endif
                         </div>
-                        
-                        <div class="mt-auto">
-                            <div class="gallery-actions">
-                                <a href="{{ route('galery.show', $item->id) }}" class="btn btn-outline-info btn-sm">
-                                    <i class="mdi mdi-eye"></i> Lihat
-                                </a>
-                                <a href="{{ route('galery.edit', $item->id) }}" class="btn btn-outline-primary btn-sm">
-                                    <i class="mdi mdi-pencil"></i> Edit
-                                </a>
-                                <form action="{{ route('galery.destroy', $item->id) }}" 
-                                      method="POST" 
-                                      class="d-inline delete-form">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger btn-sm delete-btn">
+
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title gallery-title" title="{{ $item->title }}">
+                                {{ $item->title }}
+                            </h6>
+
+                            <p class="card-text text-muted gallery-description">
+                                {{ Str::limit($item->description, 100) }}
+                            </p>
+
+                            <div class="gallery-meta mb-3">
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <i class="mdi mdi-image text-primary"></i>
+                                        <div class="small text-muted">{{ $imageCount }} Foto</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <i class="mdi mdi-calendar text-success"></i>
+                                        <div class="small text-muted">{{ $item->created_at->format('M Y') }}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-auto">
+                                <div class="gallery-actions">
+                                    <a href="{{ route('galery.show', $item->id) }}" class="btn btn-outline-info btn-sm">
+                                        <i class="mdi mdi-eye"></i> Lihat
+                                    </a>
+                                    <a href="{{ route('galery.edit', $item->id) }}" class="btn btn-outline-primary btn-sm">
+                                        <i class="mdi mdi-pencil"></i> Edit
+                                    </a>
+                                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="confirmDelete({{ $item->id }}, '{{ $item->title }}')">
                                         <i class="mdi mdi-delete"></i> Hapus
                                     </button>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @empty
-            <div class="col-12">
-                <div class="empty-state">
-                    <div class="empty-icon">
-                        <i class="mdi mdi-image-off"></i>
+                <div class="col-12">
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="mdi mdi-image-off"></i>
+                        </div>
+                        <h5>Belum Ada Galeri</h5>
+                        <p>Mulai tambahkan galeri foto pertama Anda.</p>
+                        <a href="{{ route('galery.create') }}" class="btn btn-primary">
+                            <i class="mdi mdi-plus-circle me-2"></i>Tambah Galeri Pertama
+                        </a>
                     </div>
-                    <h5>Belum Ada Galeri</h5>
-                    <p>Mulai tambahkan galeri foto pertama Anda.</p>
-                    <a href="{{ route('galery.create') }}" class="btn btn-primary">
-                        <i class="mdi mdi-plus-circle me-2"></i>Tambah Galeri Pertama
-                    </a>
                 </div>
-            </div>
             @endforelse
         </div>
     </div>
-</div> 
-                                    onclick="confirmDelete({{ $item->id }}, '{{ $item->title }}')">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @empty
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body text-center py-5">
-                    <i class="fas fa-images text-muted mb-3" style="font-size: 4rem; opacity: 0.3;"></i>
-                    <h5 class="text-muted mb-3">Belum ada galeri foto</h5>
-                    <p class="text-muted mb-4">Mulai tambahkan galeri foto pertama Anda</p>
-                    <a href="{{ route('galery.create') }}" class="btn btn-primary">
-                        <i class="fas fa-plus me-2"></i>
-                        Tambah Galeri Pertama
-                    </a>
-                </div>
-            </div>
-        </div>
-    @endforelse
 </div>
 
-{{-- Delete Confirmation Modal --}}
+<!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -223,11 +193,11 @@
 </div>
 
 @if (session('success'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            SashDashboard.showNotification('{{ session('success') }}', 'success');
-        });
-    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        SashDashboard.showNotification('{{ session('success') }}', 'success');
+    });
+</script>
 @endif
 
 <script>

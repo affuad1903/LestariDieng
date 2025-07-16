@@ -23,6 +23,7 @@
                     @csrf
                     @method('PUT')
 
+                    {{-- Pilih Paket --}}
                     <div class="mb-3">
                         <label for="paket_id" class="form-label">Paket</label>
                         <select name="paket_id" id="paket_id" class="form-select" required>
@@ -35,35 +36,38 @@
                         </select>
                     </div>
 
+                    {{-- Hari ke- --}}
                     <div class="mb-3">
-                        <label for="day_itinerary_id" class="form-label">Hari</label>
-                        <select name="day_itinerary_id" id="day_itinerary_id" class="form-select" required>
-                            <option value="">-- Pilih Hari --</option>
-                            @foreach ($dayItinerary as $day)
-                                <option value="{{ $day->id }}" {{ $detailItinerary->day_itinerary_id == $day->id ? 'selected' : '' }}>
-                                    {{ $day->nama_hari }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <label for="day" class="form-label">Hari ke-</label>
+                        <input type="number"
+                               name="day"
+                               id="day"
+                               min="1"
+                               max="31"
+                               class="form-control"
+                               required
+                               value="{{ old('day', $detailItinerary->day) }}"
+                               placeholder="Contoh: 1">
                     </div>
 
+                    {{-- Jam --}}
                     <div class="mb-3">
-                        <label for="time_itinerary_id" class="form-label">Jam</label>
-                        <select name="time_itinerary_id" id="time_itinerary_id" class="form-select" required>
-                            <option value="">-- Pilih Jam --</option>
-                            @foreach ($timeItinerary as $time)
-                                <option value="{{ $time->id }}" {{ $detailItinerary->time_itinerary_id == $time->id ? 'selected' : '' }}>
-                                    {{ \Carbon\Carbon::parse($time->waktu)->format('H:i') }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <label for="time" class="form-label">Jam</label>
+                        <input type="time"
+                               name="time"
+                               id="time"
+                               class="form-control"
+                               required
+                               value="{{ old('time', $detailItinerary->time) }}">
                     </div>
 
+                    {{-- Detail --}}
                     <div class="mb-3">
                         <label for="detail" class="form-label">Detail Itinerary</label>
                         <textarea name="detail" id="detail" rows="4" class="form-control" required>{{ old('detail', $detailItinerary->detail) }}</textarea>
                     </div>
 
+                    {{-- Tombol --}}
                     <div class="d-flex justify-content-between">
                         <a href="{{ route('detail-itinerary.index') }}" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

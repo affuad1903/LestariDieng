@@ -23,9 +23,7 @@ class DaftarDestinasiController extends Controller
     public function create(Request $request)
     {
         $paket = Paket::all();
-        $daftar_destinasi = DaftarDestinasi::all();
         
-        // Check if this is a synchronized request from paket show page
         $paket_id = $request->get('paket_id');
         $is_synchronized = !is_null($paket_id);
         
@@ -35,20 +33,26 @@ class DaftarDestinasiController extends Controller
                 return redirect()->route('daftar-d.create')
                     ->with('error', 'Paket tidak ditemukan!');
             }
-            
-            // Return synchronized view
+
+            // ✅ AMBIL ID destinasi yang SUDAH berelasi dengan paket ini
+            $related_destinasi_ids = $selected_paket->daftar_destinasi()->pluck('daftar_destinasi.id')->toArray();
+
+            // ✅ FILTER hanya destinasi yang BELUM berelasi
+            $daftar_destinasi = DaftarDestinasi::whereNotIn('id', $related_destinasi_ids)->get();
+
             return view('admin.page.daftar_destinasi.create-sync', [
                 'selected_paket' => $selected_paket,
                 'daftar_destinasi' => $daftar_destinasi
             ]);
         }
-        
-        // Return normal view
+
+        $daftar_destinasi = DaftarDestinasi::all();
         return view('admin.page.daftar_destinasi.create', [
             'paket' => $paket,
             'daftar_destinasi' => $daftar_destinasi
         ]);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -68,12 +72,13 @@ class DaftarDestinasiController extends Controller
 
         $destinasiId = $request->input('daftar_destinasi', []);
         $paketIds = $request->input('paket', []);
+
+        // ✅ Tambahkan destinasi baru
         if ($request->filled('nama_destinasi_baru')) {
             $namaDestinasiBaru = explode(',', $request->nama_destinasi_baru);
 
             foreach ($namaDestinasiBaru as $nama) {
                 $nama = trim($nama);
-
                 $existing = DaftarDestinasi::where('nama_destinasi', $nama)->first();
                 if (!$existing) {
                     $newDestinasi = DaftarDestinasi::create([
@@ -86,15 +91,22 @@ class DaftarDestinasiController extends Controller
             }
         }
 
+        // ✅ Filter duplikasi destinasi sebelum attach
         $destinasiId = array_filter($destinasiId);
         foreach ($paketIds as $id) {
             $paket = Paket::find($id);
             if ($paket && !empty($destinasiId)) {
-                $paket->daftar_destinasi()->attach($destinasiId);
+                // Cek destinasi yang sudah terhubung
+                $existing = $paket->daftar_destinasi()->pluck('daftar_destinasi.id')->toArray();
+                // Hanya ambil yang belum terhubung
+                $newAttach = array_diff($destinasiId, $existing);
+
+                if (!empty($newAttach)) {
+                    $paket->daftar_destinasi()->attach($newAttach);
+                }
             }
         }
 
-        // Check if this is a synchronized request and redirect accordingly
         if ($request->has('is_synchronized') && count($paketIds) === 1) {
             $paket_id = $paketIds[0];
             return redirect()->route('paket.show', $paket_id)
@@ -103,7 +115,6 @@ class DaftarDestinasiController extends Controller
 
         return redirect()->route('paket.index')->with('success', 'Data destinasi berhasil ditambahkan!');
     }
-
 
     /**
      * Show the form for editing the specified resource.

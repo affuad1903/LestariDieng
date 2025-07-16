@@ -71,9 +71,6 @@
         <h5 class="mb-0">
             <i class="mdi mdi-format-list-bulleted me-2"></i>Daftar Destinasi
         </h5>
-        <a href="/dashboard/daftar-d/create" class="btn btn-primary">
-            <i class="mdi mdi-plus-circle me-2"></i>Tambah Daftar Destinasi
-        </a>
     </div>
     <div class="card-body">
         @forelse ($daftar_destinasi as $item)

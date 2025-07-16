@@ -71,9 +71,6 @@
         <h5 class="mb-0">
             <i class="mdi mdi-cog me-2"></i>Daftar Fasilitas
         </h5>
-        <a href="/dashboard/daftar-fasilitas/create" class="btn btn-primary">
-            <i class="mdi mdi-plus-circle me-2"></i>Tambah Fasilitas
-        </a>
     </div>
     <div class="card-body">
         @forelse ($daftar_fasilitas as $item)

@@ -24,27 +24,30 @@ class DaftarFasilitasController extends Controller
     public function create(Request $request)
     {
         $paket = Paket::all();
-        $daftar_fasilitas = DaftarFasilitas::all();
-        
-        // Check if this is a synchronized request from paket show page
         $paket_id = $request->get('paket_id');
         $is_synchronized = !is_null($paket_id);
-        
+
         if ($is_synchronized && $paket_id) {
             $selected_paket = Paket::find($paket_id);
             if (!$selected_paket) {
                 return redirect()->route('daftar-fasilitas.create')
                     ->with('error', 'Paket tidak ditemukan!');
             }
-            
-            // Return synchronized view
+
+            // ✅ Ambil ID fasilitas yang sudah berelasi dengan paket ini
+            $related_fasilitas_ids = $selected_paket->daftar_fasilitas()->pluck('daftar_fasilitas.id')->toArray();
+
+            // ✅ Filter hanya fasilitas yang belum berelasi
+            $daftar_fasilitas = DaftarFasilitas::whereNotIn('id', $related_fasilitas_ids)->get();
+
             return view('admin.page.daftar_fasilitas.create-sync', [
                 'selected_paket' => $selected_paket,
                 'daftar_fasilitas' => $daftar_fasilitas
             ]);
         }
-        
-        // Return normal view
+
+        // Jika bukan mode sinkronisasi
+        $daftar_fasilitas = DaftarFasilitas::all();
         return view('admin.page.daftar_fasilitas.create', [
             'paket' => $paket,
             'daftar_fasilitas' => $daftar_fasilitas
@@ -74,7 +77,6 @@ class DaftarFasilitasController extends Controller
 
             foreach ($namaFasilitasBaru as $nama) {
                 $nama = trim($nama);
-
                 $existing = DaftarFasilitas::where('nama_fasilitas', $nama)->first();
                 if (!$existing) {
                     $newFasilitas = DaftarFasilitas::create([
@@ -92,11 +94,16 @@ class DaftarFasilitasController extends Controller
         foreach ($paketIds as $id) {
             $paket = Paket::find($id);
             if ($paket && !empty($fasilitasId)) {
-                $paket->daftar_fasilitas()->attach($fasilitasId);
+                // ✅ Cek fasilitas yang sudah terhubung
+                $existing = $paket->daftar_fasilitas()->pluck('daftar_fasilitas.id')->toArray();
+                $newAttach = array_diff($fasilitasId, $existing);
+
+                if (!empty($newAttach)) {
+                    $paket->daftar_fasilitas()->attach($newAttach);
+                }
             }
         }
 
-        // Check if this is a synchronized request and redirect accordingly
         if ($request->has('is_synchronized') && count($paketIds) === 1) {
             $paket_id = $paketIds[0];
             return redirect()->route('paket.show', $paket_id)

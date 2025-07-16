@@ -43,102 +43,46 @@
                         @csrf
                         <input type="hidden" name="is_synchronized" value="1">
                         <input type="hidden" name="paket_id" value="{{ $selected_paket->id }}">
-                        
-                        {{-- Pilih Hari --}}
+
+                        {{-- Hari ke- --}}
                         <div class="admin-form-group">
-                            <label for="day_itinerary_id" class="admin-form-label">
-                                <i class="fas fa-calendar-day me-2"></i>Pilih Hari
+                            <label for="day" class="admin-form-label">
+                                <i class="fas fa-calendar-day me-2"></i>Hari ke-
                                 <span class="required">*</span>
                             </label>
                             <div class="admin-form-help-text mb-3">
-                                Pilih hari untuk itinerary ini
+                                Masukkan angka hari (contoh: 1, 2, 3)
                             </div>
-                            <select name="day_itinerary_id" 
-                                    id="day_itinerary_id" 
-                                    class="admin-form-control @error('day_itinerary_id') is-invalid @enderror">
-                                <option value="">-- Pilih Hari --</option>
-                                @foreach ($day_itinerary as $item)
-                                    <option value="{{ $item->id }}" {{ old('day_itinerary_id') == $item->id ? 'selected' : '' }}>
-                                        {{ $item->nama_hari }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('day_itinerary_id')
+                            <input type="number"
+                                   name="day"
+                                   id="day"
+                                   min="1"
+                                   max="31"
+                                   class="admin-form-control @error('day') is-invalid @enderror"
+                                   value="{{ old('day') }}"
+                                   placeholder="Contoh: 1">
+                            @error('day')
                                 <div class="admin-error-message">
                                     <i class="fas fa-exclamation-circle"></i>{{ $message }}
                                 </div>
                             @enderror
                         </div>
 
-                        {{-- Tambah Hari Baru --}}
+                        {{-- Waktu --}}
                         <div class="admin-form-group">
-                            <label for="new_day" class="admin-form-label">
-                                <i class="fas fa-plus me-2"></i>Atau Tambah Hari Baru
-                            </label>
-                            <div class="admin-form-help-text mb-3">
-                                Masukkan nama hari baru jika tidak ada di daftar di atas
-                            </div>
-                            <input type="text" 
-                                   name="new_day" 
-                                   id="new_day" 
-                                   class="admin-form-control @error('new_day') is-invalid @enderror"
-                                   placeholder="Contoh: Day 3, Day 4, Hari Pertama"
-                                   value="{{ old('new_day') }}">
-                            <div class="admin-form-help-text mt-2">
-                                <i class="fas fa-info-circle text-info me-1"></i>
-                                Kosongkan jika memilih dari daftar hari yang tersedia di atas
-                            </div>
-                            @error('new_day')
-                                <div class="admin-error-message">
-                                    <i class="fas fa-exclamation-circle"></i>{{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-                        {{-- Pilih Waktu --}}
-                        <div class="admin-form-group">
-                            <label for="time_itinerary_id" class="admin-form-label">
-                                <i class="fas fa-clock me-2"></i>Pilih Waktu
+                            <label for="time" class="admin-form-label">
+                                <i class="fas fa-clock me-2"></i>Waktu
                                 <span class="required">*</span>
                             </label>
                             <div class="admin-form-help-text mb-3">
-                                Pilih waktu untuk kegiatan ini
+                                Masukkan waktu kegiatan (format 24 jam)
                             </div>
-                            <select name="time_itinerary_id" 
-                                    id="time_itinerary_id" 
-                                    class="admin-form-control @error('time_itinerary_id') is-invalid @enderror">
-                                <option value="">-- Pilih Waktu --</option>
-                                @foreach ($time_itinerary as $item)
-                                    <option value="{{ $item->id }}" {{ old('time_itinerary_id') == $item->id ? 'selected' : '' }}>
-                                        {{ \Carbon\Carbon::parse($item->waktu)->format('H:i') }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('time_itinerary_id')
-                                <div class="admin-error-message">
-                                    <i class="fas fa-exclamation-circle"></i>{{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-                        {{-- Tambah Waktu Baru --}}
-                        <div class="admin-form-group">
-                            <label for="new_time" class="admin-form-label">
-                                <i class="fas fa-plus me-2"></i>Atau Tambah Waktu Baru
-                            </label>
-                            <div class="admin-form-help-text mb-3">
-                                Masukkan waktu baru jika tidak ada di daftar di atas
-                            </div>
-                            <input type="time" 
-                                   name="new_time" 
-                                   id="new_time" 
-                                   class="admin-form-control @error('new_time') is-invalid @enderror"
-                                   value="{{ old('new_time') }}">
-                            <div class="admin-form-help-text mt-2">
-                                <i class="fas fa-info-circle text-info me-1"></i>
-                                Kosongkan jika memilih dari daftar waktu yang tersedia di atas
-                            </div>
-                            @error('new_time')
+                            <input type="time"
+                                   name="time"
+                                   id="time"
+                                   class="admin-form-control @error('time') is-invalid @enderror"
+                                   value="{{ old('time') }}">
+                            @error('time')
                                 <div class="admin-error-message">
                                     <i class="fas fa-exclamation-circle"></i>{{ $message }}
                                 </div>
@@ -154,20 +98,19 @@
                             <div class="admin-form-help-text mb-3">
                                 Jelaskan kegiatan yang akan dilakukan pada waktu tersebut
                             </div>
-                            <textarea name="detail" 
-                                      id="detail" 
+                            <textarea name="detail"
+                                      id="detail"
                                       rows="4"
                                       class="admin-form-control @error('detail') is-invalid @enderror"
-                                      placeholder="Contoh: Sarapan di hotel, Check out, Perjalanan menuju Candi Dieng, Foto di Telaga Warna"
-                                      required>{{ old('detail') }}</textarea>
+                                      placeholder="Contoh: Sarapan, Perjalanan, Foto-foto" required>{{ old('detail') }}</textarea>
                             @error('detail')
                                 <div class="admin-error-message">
                                     <i class="fas fa-exclamation-circle"></i>{{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        
-                        <!-- Submit Buttons -->
+
+                        <!-- Tombol Aksi -->
                         <div class="form-actions mt-4">
                             <div class="d-flex gap-3 justify-content-between flex-wrap">
                                 <a href="{{ route('paket.show', $selected_paket->id) }}" class="btn btn-outline-secondary">
@@ -179,6 +122,7 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -187,67 +131,6 @@
 
 @push('scripts')
 <script src="{{ asset('js/admin/admin-forms.js') }}"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const daySelect = document.getElementById('day_itinerary_id');
-    const newDayInput = document.getElementById('new_day');
-    const timeSelect = document.getElementById('time_itinerary_id');
-    const newTimeInput = document.getElementById('new_time');
-    
-    // Clear new day input when day select is changed
-    daySelect.addEventListener('change', function() {
-        if (this.value) {
-            newDayInput.value = '';
-        }
-    });
-    
-    // Clear day select when new day is entered
-    newDayInput.addEventListener('input', function() {
-        if (this.value.trim()) {
-            daySelect.value = '';
-        }
-    });
-    
-    // Clear new time input when time select is changed
-    timeSelect.addEventListener('change', function() {
-        if (this.value) {
-            newTimeInput.value = '';
-        }
-    });
-    
-    // Clear time select when new time is entered
-    newTimeInput.addEventListener('change', function() {
-        if (this.value) {
-            timeSelect.value = '';
-        }
-    });
-    
-    // Form validation
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function(e) {
-        const hasDay = daySelect.value || newDayInput.value.trim();
-        const hasTime = timeSelect.value || newTimeInput.value;
-        const hasDetail = document.getElementById('detail').value.trim();
-        
-        if (!hasDay) {
-            e.preventDefault();
-            alert('Pilih hari atau masukkan hari baru!');
-            return false;
-        }
-        
-        if (!hasTime) {
-            e.preventDefault();
-            alert('Pilih waktu atau masukkan waktu baru!');
-            return false;
-        }
-        
-        if (!hasDetail) {
-            e.preventDefault();
-            alert('Detail kegiatan harus diisi!');
-            return false;
-        }
-    });
-});
-</script>
 @endpush
+
 @endsection
