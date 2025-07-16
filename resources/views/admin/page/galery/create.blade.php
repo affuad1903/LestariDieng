@@ -81,7 +81,6 @@
                                    class="admin-file-upload-input @error('images') is-invalid @enderror @error('images.*') is-invalid @enderror"
                                    accept="image/*"
                                    multiple
-                                   data-max-size="5"
                                    data-allowed-types="image/jpeg,image/png,image/gif"
                                    required>
                             <div class="admin-file-upload-icon">
@@ -89,7 +88,7 @@
                             </div>
                             <div class="admin-file-upload-label">
                                 Klik atau drag & drop gambar galeri di sini
-                                <br><small class="text-muted">Format: JPG, PNG, GIF (Max: 5MB per file) - Bisa pilih lebih dari satu gambar</small>
+                                <br><small class="text-muted">Format: JPG, PNG, GIF - Bisa pilih lebih dari satu gambar</small>
                             </div>
                         </div>
                         @error('images')

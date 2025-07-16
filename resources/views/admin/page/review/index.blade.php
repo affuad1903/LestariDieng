@@ -19,6 +19,7 @@
 
 <!-- Dashboard Stats -->
 <div class="row mb-4">
+    <!-- Stats Cards -->
     <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
         <div class="stats-card">
             <div class="stats-icon bg-primary">
@@ -71,60 +72,56 @@
     <div class="col-lg-8 mb-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0">
-                    <i class="mdi mdi-star me-2"></i>Daftar Review Pelanggan
-                </h5>
+                <h5 class="mb-0"><i class="mdi mdi-star me-2"></i>Daftar Review Pelanggan</h5>
             </div>
             <div class="card-body">
                 @forelse ($reviews as $review)
-                <div class="review-item mb-4">
-                    <div class="row align-items-center">
-                        <div class="col-lg-8 col-md-7">
-                            <div class="review-content">
-                                <div class="review-header">
-                                    <h6 class="review-name">{{ $review->nama }}</h6>
-                                    <div class="review-rating">
-                                        @for($i = 1; $i <= 5; $i++)
-                                            <i class="mdi mdi-star {{ $i <= $review->bintang ? 'text-warning' : 'text-muted' }}"></i>
-                                        @endfor
-                                        <span class="rating-text">({{ $review->bintang }}/5)</span>
+                    <div class="review-item mb-4">
+                        <div class="row align-items-center">
+                            <div class="col-lg-8 col-md-7">
+                                <div class="review-content">
+                                    <div class="review-header">
+                                        <h6 class="review-name">{{ $review->nama }}</h6>
+                                        <div class="review-rating">
+                                            @for($i = 1; $i <= 5; $i++)
+                                                <i class="mdi mdi-star {{ $i <= $review->bintang ? 'text-warning' : 'text-muted' }}"></i>
+                                            @endfor
+                                            <span class="rating-text">({{ $review->bintang }}/5)</span>
+                                        </div>
+                                    </div>
+                                    <p class="review-text">{{ $review->review }}</p>
+                                    <div class="review-meta">
+                                        <span class="meta-item">
+                                            <i class="mdi mdi-calendar-clock"></i>
+                                            {{ $review->created_at->format('d M Y, H:i') }}
+                                        </span>
                                     </div>
                                 </div>
-                                <p class="review-text">{{ $review->review }}</p>
-                                <div class="review-meta">
-                                    <span class="meta-item">
-                                        <i class="mdi mdi-calendar-clock"></i>
-                                        {{ $review->created_at->format('d M Y, H:i') }}
-                                    </span>
+                            </div>
+                            <div class="col-lg-4 col-md-5">
+                                <div class="review-actions">
+                                    <form action="{{ route('review.destroy', $review->id) }}" method="POST" class="d-inline delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-outline-danger btn-sm delete-btn">
+                                            <i class="mdi mdi-delete"></i> Hapus
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-5">
-                            <div class="review-actions">
-                                <form action="{{ route('review.destroy', $review->id) }}" 
-                                      method="POST" 
-                                      class="d-inline delete-form">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger btn-sm delete-btn">
-                                        <i class="mdi mdi-delete"></i> Hapus
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
                     </div>
-                </div>
                 @empty
-                <div class="empty-state">
-                    <div class="empty-icon">
-                        <i class="mdi mdi-star-off"></i>
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="mdi mdi-star-off"></i>
+                        </div>
+                        <h5>Belum Ada Review</h5>
+                        <p>Bagikan link review untuk mulai mengumpulkan feedback dari pelanggan.</p>
+                        <a href="{{ route('review.generate-link') }}" class="btn btn-primary">
+                            <i class="mdi mdi-link me-2"></i>Generate Link Review
+                        </a>
                     </div>
-                    <h5>Belum Ada Review</h5>
-                    <p>Bagikan link review untuk mulai mengumpulkan feedback dari pelanggan.</p>
-                    <a href="{{ route('review.generate-link') }}" class="btn btn-primary">
-                        <i class="mdi mdi-link me-2"></i>Generate Link Review
-                    </a>
-                </div>
                 @endforelse
             </div>
         </div>
@@ -160,32 +157,23 @@
             <div class="card-body">
                 <div class="rating-stats">
                     @for($i = 5; $i >= 1; $i--)
-                    @php
-                        $count = $reviews->where('bintang', $i)->count();
-                        $percentage = $reviews->count() > 0 ? ($count / $reviews->count()) * 100 : 0;
-                    @endphp
-                    <div class="rating-stat-item">
-                        <div class="rating-stat-label">
-                            {{ $i }} <i class="mdi mdi-star text-warning"></i>
+                        @php
+                            $count = $reviews->where('bintang', $i)->count();
+                            $percentage = $reviews->count() > 0 ? ($count / $reviews->count()) * 100 : 0;
+                        @endphp
+                        <div class="rating-stat-item">
+                            <div class="rating-stat-label">{{ $i }} <i class="mdi mdi-star text-warning"></i></div>
+                            <div class="rating-stat-bar">
+                                <div class="rating-stat-progress" style="width: {{ $percentage }}%"></div>
+                            </div>
+                            <div class="rating-stat-count">{{ $count }}</div>
                         </div>
-                        <div class="rating-stat-bar">
-                            <div class="rating-stat-progress" style="width: {{ $percentage }}%"></div>
-                        </div>
-                        <div class="rating-stat-count">{{ $count }}</div>
-                    </div>
                     @endfor
                 </div>
             </div>
         </div>
         @endif
     </div>
-</div>
-                        Generate Link Review
-                    </a>
-                </div>
-            </div>
-        </div>
-    @endforelse
 </div>
 
 {{-- Delete Confirmation Modal --}}
@@ -209,8 +197,7 @@
                     @csrf
                     @method("DELETE")
                     <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-trash me-1"></i>
-                        Hapus Review
+                        <i class="fas fa-trash me-1"></i> Hapus Review
                     </button>
                 </form>
             </div>

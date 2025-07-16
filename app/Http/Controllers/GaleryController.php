@@ -23,10 +23,18 @@ class GaleryController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'images.*' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'images' => 'required|array',
+            'images.*' => 'image|mimes:jpg,jpeg,png,gif',
+        ], [
+            'images.required' => 'Minimal satu gambar harus diunggah.',
+            'images.*.image' => 'File harus berupa gambar.',
+            'images.*.mimes' => 'Gambar harus berformat JPG, JPEG, PNG, atau GIF.',
         ]);
-
-        $galery = Galery::create(['title' => $request->title]);
+        
+        $galery = Galery::create([
+            'title' => $request->title,
+            'description' => $request->description
+        ]);
 
         $folderPath = public_path('image/galery/' . $galery->id);
         if (!file_exists($folderPath)) {
