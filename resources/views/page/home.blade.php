@@ -1,15 +1,20 @@
 @extends('layouts.master')
 
-@section('title','Lestari Wisata Dieng - Keindahan Alam Wisata Dieng')
-@section('meta_description', 'Jelajahi wisata Dieng yang penuh pesona, dari Candi Dieng hingga panorama alam yang memukau di Wonosobo.')
+@section('title', 'Lestari Wisata Dieng - Keindahan Alam Wisata Dieng')
+@section('meta_description',
+    'Jelajahi wisata Dieng yang penuh pesona, dari Candi Dieng hingga panorama alam yang
+    memukau di Wonosobo.')
 @section('content')
     {{-- Jumbotron --}}
     <section class="container-fluid p-0">
-        <header class="d-flex justify-content-center align-items-center text-white text-center" style="background: url('{{ asset('/image/head.jpg') }}') center/cover no-repeat; height: 570px;">
+        <header class="d-flex justify-content-center align-items-center text-white text-center"
+            style="background: url('{{ asset('/image/head.jpg') }}') center/cover no-repeat; height: 570px;">
             <div class="overlay w-100 h-100" style="background: rgba(0, 0, 0, 0.5);"></div>
             <div class="position-absolute">
                 <h2 class="responsive-text fw-bold">Selamat Datang di Lestari Wisata Dieng</h2>
-                <a href="{{url('/paket-index')}}"><button class="border mt-4 rounded-pill border-white text-center custom-borderHead responsive-text-content">Lihat Paket</button></a>
+                <a href="{{ url('/paket-index') }}"><button
+                        class="border mt-4 rounded-pill border-white text-center custom-borderHead responsive-text-content">Lihat
+                        Paket</button></a>
             </div>
         </header>
     </section>
@@ -19,74 +24,42 @@
     <section class="container-fluid container-section">
         {{-- Header --}}
         <header class="row">
-            <h2 class="text-center fw-bold custom-contentHeader">Destinasi Wisata Dieng <script>document.write(new Date().getFullYear());</script></h2>
+            <h2 class="text-center fw-bold custom-contentHeader">Destinasi Wisata Dieng
+                <script>
+                    document.write(new Date().getFullYear());
+                </script>
+            </h2>
         </header>
         {{-- /Header --}}
         {{-- Card --}}
         <section class="row container-section">
-            <article class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-2" >
-                <div class="custom-overlay d-flex text-white" style="background: url('{{ asset('/image/head.jpg') }}') center/cover no-repeat; height: clamp(15rem, 40vw, 19rem);">
-                    <div class="overlay custom-overlay w-100 h-100 ">
-                        <h3 class="fw-bold custom-titleCard text-center">Candi Dieng</h3>
-                        <div class="row mx-3 my-2">
-                            <p class="fw-bold">Candi Dieng</p>
-                            <p class="responsive-text-content">Kompleks candi tertua yang ada di Pulau Jawa berada pada ketinggian 2.000 mdpl dan menjadi salah satu kompleks candi tertinggi.</p>
-                            <a href="" class="text-center mt-4">
-                                <button class="rounded-pill border-white py-2 px-4 custom-borderHead responsive-text-content">Selengkapnya</button>
-                            </a>
+            @foreach ($destinations as $item)
+                <article class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <div class="custom-overlay d-flex text-white"
+                        style="background: url('{{ asset('/image/destination/' . $item->thumbnail_image) }}') center/cover no-repeat; height: clamp(15rem, 40vw, 19rem);">
+                        <div class="overlay custom-overlay w-100 h-100 ">
+                            <h3 class="fw-bold custom-titleCard text-center">{{ $item->content_title }}</h3>
+                            <div class="row mx-3 my-2">
+                                <p class="fw-bold">{{ $item->content_title }}</p>
+                                <p class="responsive-text-content">{{ Str::limit(strip_tags($item->content_summary), 120) }}
+                                </p>
+                                <a href="/destinasi-show/{{ $item->id }}" class="text-center mt-4">
+                                    <button
+                                        class="rounded-pill border-white py-2 px-4 custom-borderHead responsive-text-content">Selengkapnya</button>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </article>
-            <article class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-2" >
-                <div class="custom-overlay d-flex text-white" style="background: url('{{ asset('/image/head.jpg') }}') center/cover no-repeat; height: clamp(15rem, 40vw, 19rem);">
-                    <div class="overlay custom-overlay w-100 h-100 ">
-                        <h3 class="fw-bold custom-titleCard text-center">Candi Dieng</h3>
-                        <div class="row mx-3 my-2">
-                            <p class="fw-bold">Candi Dieng</p>
-                            <p class="responsive-text-content">Kompleks candi tertua yang ada di Pulau Jawa berada pada ketinggian 2.000 mdpl dan menjadi salah satu kompleks candi tertinggi.</p>
-                            <a href="" class="text-center mt-4">
-                                <button class="rounded-pill border-white py-2 px-4 custom-borderHead responsive-text-content">Selengkapnya</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-2" >
-                <div class="custom-overlay d-flex text-white" style="background: url('{{ asset('/image/head.jpg') }}') center/cover no-repeat; height: clamp(15rem, 40vw, 19rem);">
-                    <div class="overlay custom-overlay w-100 h-100 ">
-                        <h3 class="fw-bold custom-titleCard text-center">Candi Dieng</h3>
-                        <div class="row mx-3 my-2">
-                            <p class="fw-bold">Candi Dieng</p>
-                            <p class="responsive-text-content">Kompleks candi tertua yang ada di Pulau Jawa berada pada ketinggian 2.000 mdpl dan menjadi salah satu kompleks candi tertinggi.</p>
-                            <a href="" class="text-center mt-4">
-                                <button class="rounded-pill border-white py-2 px-4 custom-borderHead responsive-text-content">Selengkapnya</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-2" >
-                <div class="custom-overlay d-flex text-white" style="background: url('{{ asset('/image/head.jpg') }}') center/cover no-repeat; height: clamp(15rem, 40vw, 19rem);">
-                    <div class="overlay custom-overlay w-100 h-100 ">
-                        <h3 class="fw-bold custom-titleCard text-center">Candi Dieng</h3>
-                        <div class="row mx-3 my-2">
-                            <p class="fw-bold">Candi Dieng</p>
-                            <p class="responsive-text-content">Kompleks candi tertua yang ada di Pulau Jawa berada pada ketinggian 2.000 mdpl dan menjadi salah satu kompleks candi tertinggi.</p>
-                            <a href="" class="text-center mt-4">
-                                <button class="rounded-pill border-white py-2 px-4 custom-borderHead responsive-text-content">Selengkapnya</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
+                </article>
+            @endforeach
         </section>
         {{-- /Card --}}
         {{-- CTA --}}
         <section class="row text-center">
             <div class="col-12">
-                <a href="{{url('/destinasi-index')}}">
-                    <button class="rounded-pill text-center custom-borderContent responsive-text-content">Lihat Lainnya</button>
+                <a href="{{ url('/destinasi-index') }}">
+                    <button class="rounded-pill text-center custom-borderContent responsive-text-content">Lihat
+                        Lainnya</button>
                 </a>
             </div>
         </section>
@@ -98,96 +71,68 @@
     <section class="container-fluid container-section custom-background">
         {{-- Header --}}
         <header class="row">
-            <h2 class="text-center fw-bold custom-contentHeader">Paket Wisata Dieng <script>document.write(new Date().getFullYear());</script></h2>
+            <h2 class="text-center fw-bold custom-contentHeader">
+                Paket Wisata Dieng
+                <script>
+                    document.write(new Date().getFullYear());
+                </script>
+            </h2>
         </header>
         {{-- /Header --}}
 
         {{-- Card --}}
-        <section class="row container-section">
-            <article class="col-md-4 col-sm-12 mt-2">
-                <div class="card custom-cardShadow">
-                    <div class="row">
-                        <div class="col-12">
-                            <img style="" src="{{ asset('/image/head.jpg') }}" class="card-img-top" alt="...">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="text-uppercase fw-bold text-center custom-contentHeader">Trip Dieng 1 Hari</h3>
-                        <div class="d-flex justify-content-start flex-row my-4 responsive-text-content">
-                            <i class="ri-timer-2-line me-1"></i>
-                            <p class="card-text">1 Day 1 Malam</p>
-                        </div>
-                        <hr>
-                        <div class="row mt-3 text-center">
-                            <div class="col-12">
-                                <a href="">
-                                    <button class="rounded-pill text-center custom-borderContent responsive-text-content">Lihat Detail</button>
-                                </a>
+        <section class="container-fluid container-section custom-background">
+            {{-- Header --}}
+            <header class="row mb-4">
+                <h2 class="text-center fw-bold custom-contentHeader">
+                    Paket Wisata Dieng
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+                </h2>
+            </header>
+            {{-- Card --}}
+            <section class="row container-section justify-content-center">
+                @foreach ($pakets->take(3) as $paket)
+                    <article class="col-md-4 col-sm-12 mb-4">
+                        <div class="custom-card">
+                            <div class="card-image-wrapper">
+                                <img src="{{ asset('/image/paket/' . $paket->paket_image) }}"
+                                    alt="{{ $paket->paket_title }}">
+                                <div class="overlay-gradient"></div>
+                                <div class="card-title-overlay">
+                                    <h3>{{ $paket->paket_title }}</h3>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="ri-timer-2-line me-2"></i>
+                                    <p class="mb-0">{{ $paket->paket_sub_title_date }}</p>
+                                </div>
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="ri-group-line me-2"></i>
+                                    <p class="mb-0">Kapasitas Maksimal {{ $paket->paket_detail }} Orang</p>
+                                </div>
+                                <a href="{{ url('/paket-detail/' . $paket->id) }}" class="btn-detail">Lihat Paket</a>
                             </div>
                         </div>
-                    </div>
+                    </article>
+                @endforeach
+            </section>
+
+            {{-- CTA --}}
+            <section class="row text-center">
+                <div class="col-12">
+                    <a href="{{ url('/paket-index') }}">
+                        <button class="rounded-pill text-center custom-borderContent responsive-text-content">Lihat Semua
+                            Paket</button>
+                    </a>
                 </div>
-            </article>
-            <article class="col-md-4 col-sm-12 mt-2">
-                <div class="card custom-cardShadow">
-                    <div class="row">
-                        <div class="col-12">
-                            <img style="" src="{{ asset('/image/head.jpg') }}" class="card-img-top" alt="...">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="text-uppercase fw-bold text-center custom-contentHeader">Trip Dieng 1 Hari</h3>
-                        <div class="d-flex justify-content-start flex-row my-4 responsive-text-content">
-                            <i class="ri-timer-2-line me-1"></i>
-                            <p class="card-text">1 Day 1 Malam</p>
-                        </div>
-                        <hr>
-                        <div class="row mt-3 text-center">
-                            <div class="col-12">
-                                <a href="">
-                                    <button class="rounded-pill text-center custom-borderContent responsive-text-content">Lihat Detail</button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="col-md-4 col-sm-12 mt-2">
-                <div class="card custom-cardShadow">
-                    <div class="row">
-                        <div class="col-12">
-                            <img style="" src="{{ asset('/image/head.jpg') }}" class="card-img-top" alt="...">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="text-uppercase fw-bold text-center custom-contentHeader">Trip Dieng 1 Hari</h3>
-                        <div class="d-flex justify-content-start flex-row my-4 responsive-text-content">
-                            <i class="ri-timer-2-line me-1"></i>
-                            <p class="card-text">1 Day 1 Malam</p>
-                        </div>
-                        <hr>
-                        <div class="row mt-3 text-center">
-                            <div class="col-12">
-                                <a href="">
-                                    <button class="rounded-pill text-center custom-borderContent responsive-text-content">Lihat Detail</button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
+            </section>
         </section>
+
         {{-- /Card --}}
 
-        {{-- CTA --}}
-        <section class="row text-center">
-            <div class="col-12">
-                <a href="{{url('/paket-index')}}">
-                    <button class="rounded-pill text-center custom-borderContent responsive-text-content">Lihat Semua Paket</button>
-                </a>
-            </div>
-        </section>
-        {{-- /CTA --}}
     </section>
     {{-- Paket Wisata --}}
 
@@ -207,7 +152,7 @@
                             <div class="row me-1">
                                 <div class="d-inline-flex">
                                     <section class="custom-reviewContainerImg">
-                                        <img src="{{asset('image/profil.jpg')}}" alt="">
+                                        <img src="{{ asset('image/profil.jpg') }}" alt="">
                                     </section>
                                     <section class="ms-2 custom-reviewName">
                                         <h3>Affandi Putra Pradana</h3>
@@ -230,7 +175,7 @@
                             <div class="row me-1">
                                 <div class="d-inline-flex">
                                     <section class="custom-reviewContainerImg">
-                                        <img src="{{asset('image/profil.jpg')}}" alt="">
+                                        <img src="{{ asset('image/profil.jpg') }}" alt="">
                                     </section>
                                     <section class="ms-2 custom-reviewName">
                                         <h3>Affandi Putra Pradana</h3>
@@ -253,7 +198,7 @@
                             <div class="row me-1">
                                 <div class="d-inline-flex">
                                     <section class="custom-reviewContainerImg">
-                                        <img src="{{asset('image/profil.jpg')}}" alt="">
+                                        <img src="{{ asset('image/profil.jpg') }}" alt="">
                                     </section>
                                     <section class="ms-2 custom-reviewName">
                                         <h3>Affandi Putra Pradana</h3>
@@ -276,7 +221,7 @@
                             <div class="row me-1">
                                 <div class="d-inline-flex">
                                     <section class="custom-reviewContainerImg">
-                                        <img src="{{asset('image/profil.jpg')}}" alt="">
+                                        <img src="{{ asset('image/profil.jpg') }}" alt="">
                                     </section>
                                     <section class="ms-2 custom-reviewName">
                                         <h3>Affandi Putra Pradana</h3>
@@ -299,7 +244,7 @@
                             <div class="row me-1">
                                 <div class="d-inline-flex">
                                     <section class="custom-reviewContainerImg">
-                                        <img src="{{asset('image/profil.jpg')}}" alt="">
+                                        <img src="{{ asset('image/profil.jpg') }}" alt="">
                                     </section>
                                     <section class="ms-2 custom-reviewName">
                                         <h3>Affandi Putra Pradana</h3>
@@ -319,7 +264,8 @@
         <section class="row">
             <h2 class="text-center fw-bold custom-contentHeader">Review Perjalanan Kamu</h2>
             <form action="">
-                <textarea style="height: 100px;" class="border border-2 form-control mb-2 responsive-text-content" name="" id=""></textarea>
+                <textarea style="height: 100px;" class="border border-2 form-control mb-2 responsive-text-content" name=""
+                    id=""></textarea>
             </form>
         </section>
         {{-- /Card Review --}}

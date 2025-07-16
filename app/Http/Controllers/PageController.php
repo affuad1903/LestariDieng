@@ -3,14 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Paket;
+use App\Models\Destination;
 
 class PageController extends Controller
 {
     public function homeIndex(){
-        return view('page.home');
+        $destination = Destination::where('is_main_page', true)->get();
+        $pakets = Paket::where('is_main_page', true)->get();
+
+        return view('page.home', [
+            'pakets' => $pakets,          // ini variabel yg betul
+            'destinations' => $destination,
+        ]);
+
     }
     public function destinasiIndex(){
-        return view('page.destinasi.index');
+        $destination = Destination::all();
+        return view('page.destinasi.index', compact('destination'));
     }
     public function destinasiShow($id){
         $destination = Destination::with(['destination_section', 'destination_uniq'])->findOrFail($id);
@@ -18,11 +28,23 @@ class PageController extends Controller
         return view('page.destinasi.show', compact('destination', 'destinationAll'));
     }
     public function paketIndex(){
-        return view('page.paket.index');
+        $pakets = Paket::all();
+        return view('page.paket.index', compact('pakets'));
     }
-    public function paketShow(){
-        return view('page.paket.show');
-    }
+    public function paketShow($id)
+    {
+        $paket = Paket::with(['daftar_destinasi', 'daftar_fasilitas', 'detailItinerary'])->findOrFail($id);
+
+        // group by day, lalu sort by time di masing-masing group
+        $groupedItinerary = $paket->detailItinerary
+            ->sortBy('time')
+            ->groupBy('day');
+
+        return view('page.paket.show', [
+            'paket' => $paket,
+            'groupedItinerary' => $groupedItinerary,
+        ]);
+        }
     public function galeriIndex(){
         return view('page.galery.index');
     }
