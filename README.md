@@ -1,64 +1,18 @@
-## 🗄️ Seeder Database dari lwd_db.sql
-
-Project ini menyediakan seeder per tabel sesuai data dari file `lwd_db.sql`.
-
-### Cara Menjalankan Seeder
-
-1. Pastikan sudah melakukan migrasi database:
-   ```bash
-   php artisan migrate
-   ```
-2. Jalankan seeder sesuai tabel yang diinginkan, contoh:
-   ```bash
-   php artisan db:seed --class=ContactSeeder
-   php artisan db:seed --class=DaftarDestinasiSeeder
-   php artisan db:seed --class=DaftarDestinasiPaketSeeder
-   php artisan db:seed --class=DaftarFasilitasSeeder
-   php artisan db:seed --class=DaftarFasilitasPaketSeeder
-   # dst sesuai nama seeder
-   ```
-3. Untuk menjalankan semua seeder sekaligus, tambahkan ke `DatabaseSeeder.php`:
-   ```php
-   $this->call([
-       ContactSeeder::class,
-       DaftarDestinasiSeeder::class,
-       DaftarDestinasiPaketSeeder::class,
-       DaftarFasilitasSeeder::class,
-       DaftarFasilitasPaketSeeder::class,
-       // dst
-   ]);
-   ```
-   Lalu jalankan:
-   ```bash
-   php artisan db:seed
-   ```
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
+## 🚀 LestariDieng Laravel Project
 
 ---
 
-## 🚀 Tutorial Instalasi & Menjalankan Project Laravel
+## 📦 Fitur Project
 
-Berikut adalah langkah-langkah **step by step** untuk menginstall dan menjalankan project ini di lokal:
+Project ini adalah aplikasi Laravel untuk mengelola data destinasi wisata, paket wisata, fasilitas, dan kontak.
+
+- Manajemen data destinasi & paket wisata
+- Seeder database siap pakai
+- Frontend menggunakan Vite
+
+---
+
+## ⚙️ Cara Install & Menjalankan Project
 
 ### 1. Clone Repository
 
@@ -88,85 +42,49 @@ php artisan key:generate
 
 ### 5. Setting Database
 
-Edit file `.env` sesuai konfigurasi database lokal Anda. Default menggunakan SQLite, bisa diganti ke MySQL/PostgreSQL sesuai kebutuhan.
+Edit file `.env` sesuai konfigurasi database Anda (MySQL, PostgreSQL, atau SQLite).
 
-### 6. Migrasi Database
+### 6. Migrasi & Seed Database
 
 ```bash
 php artisan migrate
+php artisan db:seed
 ```
-Jika error duplicate column, cek dan edit migration yang bermasalah.
+
+> 🔥 **Catatan:** Jika ingin seed spesifik, jalankan:
+>
+> ```bash
+> php artisan db:seed --class=ContactSeeder
+> php artisan db:seed --class=DaftarDestinasiSeeder
+> php artisan db:seed --class=DaftarDestinasiPaketSeeder
+> php artisan db:seed --class=DaftarFasilitasSeeder
+> php artisan db:seed --class=DaftarFasilitasPaketSeeder
+> ```
 
 ### 7. Menjalankan Server Laravel
 
 ```bash
 php artisan serve
 ```
+
 Server akan berjalan di `http://127.0.0.1:8000`
 
-### 8. Menjalankan Frontend (Vite)
+---
 
-```bash
-npm run dev
-```
-Frontend berjalan di `http://localhost:5173` (default Vite)
+## 💡 Tips & Troubleshooting
+
+- Pastikan versi Node.js minimal **18.x**.
+- Jika error saat migrate (misalnya duplicate column), cek & revisi migration terkait.
+- Untuk development lebih nyaman, gunakan dua terminal:
+  - `php artisan serve`
+  - `npm run dev`
 
 ---
 
-## 📝 Catatan
-- Pastikan versi Node.js minimal 18.x agar kompatibel dengan Vite dan plugin Laravel.
-- Jika menggunakan SQLite, file database sudah tersedia di folder `database/database.sqlite`.
-- Untuk development, gunakan dua terminal: satu untuk `php artisan serve`, satu untuk `npm run dev`.
+## 👨‍💻 Kontributor
+
+- [Bagus Nur Solayman](https://github.com/bagusumby)
+- [Affandi Putra Pradana](https://github.com/affuad1903)
 
 ---
 
-## 💡 Troubleshooting
-- Jika ada error migrasi, cek file migration dan database.
-- Jika dependency tidak terinstall, pastikan Composer & Node.js sudah terinstall dengan benar.
-
----
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
