@@ -1,3 +1,37 @@
+## 🗄️ Seeder Database dari lwd_db.sql
+
+Project ini menyediakan seeder per tabel sesuai data dari file `lwd_db.sql`.
+
+### Cara Menjalankan Seeder
+
+1. Pastikan sudah melakukan migrasi database:
+   ```bash
+   php artisan migrate
+   ```
+2. Jalankan seeder sesuai tabel yang diinginkan, contoh:
+   ```bash
+   php artisan db:seed --class=ContactSeeder
+   php artisan db:seed --class=DaftarDestinasiSeeder
+   php artisan db:seed --class=DaftarDestinasiPaketSeeder
+   php artisan db:seed --class=DaftarFasilitasSeeder
+   php artisan db:seed --class=DaftarFasilitasPaketSeeder
+   # dst sesuai nama seeder
+   ```
+3. Untuk menjalankan semua seeder sekaligus, tambahkan ke `DatabaseSeeder.php`:
+   ```php
+   $this->call([
+       ContactSeeder::class,
+       DaftarDestinasiSeeder::class,
+       DaftarDestinasiPaketSeeder::class,
+       DaftarFasilitasSeeder::class,
+       DaftarFasilitasPaketSeeder::class,
+       // dst
+   ]);
+   ```
+   Lalu jalankan:
+   ```bash
+   php artisan db:seed
+   ```
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -19,6 +53,78 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - [Robust background job processing](https://laravel.com/docs/queues).
 - [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
+
+---
+
+## 🚀 Tutorial Instalasi & Menjalankan Project Laravel
+
+Berikut adalah langkah-langkah **step by step** untuk menginstall dan menjalankan project ini di lokal:
+
+### 1. Clone Repository
+
+```bash
+git clone <url-repo-anda>
+cd LestariDieng
+```
+
+### 2. Install Dependency Backend (PHP)
+
+```bash
+composer install
+```
+
+### 3. Install Dependency Frontend (Node.js)
+
+```bash
+npm install
+```
+
+### 4. Copy File Environment & Generate Key
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 5. Setting Database
+
+Edit file `.env` sesuai konfigurasi database lokal Anda. Default menggunakan SQLite, bisa diganti ke MySQL/PostgreSQL sesuai kebutuhan.
+
+### 6. Migrasi Database
+
+```bash
+php artisan migrate
+```
+Jika error duplicate column, cek dan edit migration yang bermasalah.
+
+### 7. Menjalankan Server Laravel
+
+```bash
+php artisan serve
+```
+Server akan berjalan di `http://127.0.0.1:8000`
+
+### 8. Menjalankan Frontend (Vite)
+
+```bash
+npm run dev
+```
+Frontend berjalan di `http://localhost:5173` (default Vite)
+
+---
+
+## 📝 Catatan
+- Pastikan versi Node.js minimal 18.x agar kompatibel dengan Vite dan plugin Laravel.
+- Jika menggunakan SQLite, file database sudah tersedia di folder `database/database.sqlite`.
+- Untuk development, gunakan dua terminal: satu untuk `php artisan serve`, satu untuk `npm run dev`.
+
+---
+
+## 💡 Troubleshooting
+- Jika ada error migrasi, cek file migration dan database.
+- Jika dependency tidak terinstall, pastikan Composer & Node.js sudah terinstall dengan benar.
+
+---
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
 ## Learning Laravel
