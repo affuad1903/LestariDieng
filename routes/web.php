@@ -18,10 +18,6 @@ use App\Http\Controllers\DestinationSectionController;
 use App\Http\Controllers\ReviewController;
 
 
-// Route::get('/sitemap.xml', function () {
-//     return response()->view('sitemap')->header('Content-Type', 'text/xml');
-// });
-
 // Authentication Routes - Prevent authenticated users from accessing login/register
 Route::middleware(['guest'])->group(function () {
     Route::get('/register', [AuthController::class,'showregister'])->name('register');
@@ -48,6 +44,7 @@ Route::get('/paket-jeep-show', [PageController::class,'paketJeepShow']);
 Route::get('/galeri-index', [PageController::class,'galeriIndex']);
 Route::get('/galeri-show/{id}', [PageController::class, 'galeriShow'])->name('galeryshow');
 Route::get('/kontak-index', [PageController::class,'kontakIndex']);
+Route::post('/kontak-kirim', [PageController::class,'kontakKirim'])->name('kontak.kirim');
 
 // Public Review Routes
 Route::get('/review/create', [ReviewController::class, 'create'])->name('review.create');

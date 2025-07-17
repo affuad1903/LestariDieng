@@ -79,5 +79,21 @@ class ReviewController extends Controller
 
         return redirect()->route('review.index')->with('success', 'Review berhasil dihapus.');
     }
+    public function kontakKirim(Request $request)
+    {
+        $validated = $request->validate([
+            'contactus_name' => 'required|string|max:255',
+            'contactus_phone' => 'required|string|max:20',
+            'contactus_email' => 'required|email',
+            'contactus_subject' => 'required|string|max:255',
+            'contactus_message' => 'required|string',
+        ]);
 
-}
+        // Simpan ke database atau kirim email
+        // Contoh kirim email (butuh konfigurasi mail di .env):
+        /*
+        Mail::to('admin@lestariwisata.com')->send(new ContactUsMail($validated));
+        */
+
+        return back()->with('success', 'Pesan kamu telah dikirim! Kami akan segera menghubungi kamu.');
+    }}
