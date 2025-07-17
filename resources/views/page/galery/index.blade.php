@@ -13,7 +13,12 @@
         </section>
         <section class="column">
             <div class="containerImg">
-                <img class="borderImgGaleri" src="{{ asset('/image/head.jpg') }}" alt="Galeri Lestari WIsata Dieng">
+                @php
+                    $firstGalery = $galeries->first();
+                    $firstImage = optional($firstGalery?->galery_img->first());
+                    $imageUrl = $firstImage ? asset('image/galery/' . $firstGalery->id . '/' . $firstImage->image) : asset('image/default.jpg');
+                @endphp
+                <img class="borderImgGaleri" src="{{$imageUrl}}" alt="Galeri Lestari WIsata Dieng">
             </div>
         </section>
     </header>

@@ -254,6 +254,12 @@
 
 .borderImgGaleri{
     border-radius: 25px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 .borderImgGaleriShow{
     border-radius: 25px;
