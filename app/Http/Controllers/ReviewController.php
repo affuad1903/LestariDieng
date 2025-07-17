@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Home;
 use App\Models\Paket;
 use App\Models\Review;
 use Illuminate\Http\Request;
@@ -30,6 +31,7 @@ class ReviewController extends Controller
     public function create(Request $request)
     {
         $pakets = Paket::all();
+        $home = Home::with(['socialMedias', 'legalities', 'contacts'])->first();
         $paket_id = $request->query('paket_id');
 
         // Validasi ID paket
@@ -37,7 +39,7 @@ class ReviewController extends Controller
             return redirect()->route('home')->with('error', 'Paket tidak ditemukan.');
         }
 
-        return view('page.review.create', compact('pakets', 'paket_id'));
+        return view('page.review.create', compact('pakets', 'paket_id', 'home'));
     }
 
     /**
