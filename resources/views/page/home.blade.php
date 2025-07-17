@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="d-flex align-items-center mb-3">
                                     <i class="ri-group-line me-2"></i>
-                                    <p class="mb-0">Kapasitas Maksimal {{ $paket->paket_detail }} Orang</p>
+                                    <p class="mb-0">Kapasitas Minimal {{ $paket->paket_detail }} Orang</p>
                                 </div>
                                 <a href="{{ url('/paket-show/' . $paket->id) }}" class="btn-detail text-center">Lihat Paket</a>
                             </div>
@@ -120,7 +120,7 @@
             <section class="row text-center">
                 <div class="col-12">
                     <a href="{{ url('/paket-index') }}">
-                        <button class="rounded-pill text-center custom-borderContent responsive-text-content">Lihat SemuaPaket</button>
+                        <button class="rounded-pill text-center custom-borderContent responsive-text-content">Lihat Semua Paket</button>
                     </a>
                 </div>
             </section>

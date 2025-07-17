@@ -3,6 +3,8 @@
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/admin/dashboard-home.css') }}">
 <link rel="stylesheet" href="{{ asset('css/admin/forms.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin/admin-forms.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin/flash-messages.css') }}">
 @endpush
 
 @section('icon-title')
@@ -38,19 +40,32 @@
                         </section>
 
                         {{-- Logo --}}
-                        <section class="form-group">
-                            <h3 class="m-0"><label for="logo">Logo</label></h3>
-                            <input type="file" name="logo" class="file-upload-default text-dark" id="logoUpload">
-                            @error('logo')
-                                <div class="alert alert-danger py-0 my-1">{{ $message }}</div>
-                            @enderror
-                            <div class="input-group col-xs-12">
-                                <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                                <span class="input-group-append">
-                                    <button class="file-upload-browse btn btn-gradient-primary my-2 px-3 py-1" type="button">Upload</button>
-                                </span>
+                        <div class="form-group">
+                            <label for="logo" class="form-label">
+                                <i class="mdi mdi-image me-2"></i>Logo
+                            </label>
+                            <div class="admin-file-upload-container">
+                                <input type="file" 
+                                    name="logo" 
+                                    id="logo" 
+                                    class="admin-file-upload-input @error('logo') is-invalid @enderror"
+                                    accept="image/*"
+                                    data-allowed-types="image/jpeg,image/png,image/gif"
+                                    required>
+                                <div class="admin-file-upload-icon">
+                                    <i class="mdi mdi-cloud-upload"></i>
+                                </div>
+                                <div class="admin-file-upload-label">
+                                    Klik atau drag & drop gambar destinasi di sini
+                                    <br><small class="text-muted">Format: JPG, PNG, GIF (Max: 2MB)</small>
+                                </div>
                             </div>
-                        </section>
+                            @error('logo')
+                                <div class="admin-error-message">
+                                    <i class="mdi mdi-alert-circle"></i>{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
 
                         {{-- Tag Line --}}
                         <section class="form-group">
@@ -62,19 +77,32 @@
                         </section>
 
                         {{-- Hero Image --}}
-                        <section class="form-group">
-                            <h3 class="m-0"><label for="hero_image">Hero Image</label></h3>
-                            <input type="file" name="hero_image" class="file-upload-default text-dark" id="heroUpload">
+                        <div class="form-group">
+                            <label for="hero_image" class="form-label">
+                                <i class="mdi mdi-image me-2"></i>Hero Image
+                            </label>
+                            <div class="admin-file-upload-container">
+                                <input type="file" 
+                                    name="hero_image" 
+                                    id="hero_image" 
+                                    class="admin-file-upload-input @error('hero_image') is-invalid @enderror"
+                                    accept="image/*"
+                                    data-allowed-types="image/jpeg,image/png,image/gif"
+                                    required>
+                                <div class="admin-file-upload-icon">
+                                    <i class="mdi mdi-cloud-upload"></i>
+                                </div>
+                                <div class="admin-file-upload-label">
+                                    Klik atau drag & drop gambar destinasi di sini
+                                    <br><small class="text-muted">Format: JPG, PNG, GIF (Max: 2MB)</small>
+                                </div>
+                            </div>
                             @error('hero_image')
-                                <div class="alert alert-danger py-0 my-1">{{ $message }}</div>
+                                <div class="admin-error-message">
+                                    <i class="mdi mdi-alert-circle"></i>{{ $message }}
+                                </div>
                             @enderror
-                            <section class="input-group col-xs-12">
-                                <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Hero Image">
-                                <span class="input-group-append">
-                                    <button class="file-upload-browse btn btn-gradient-primary my-2 px-3 py-1" type="button">Upload</button>
-                                </span>
-                            </section>
-                        </section>
+                        </div>
                     </section>
                     {{-- Submit --}}
                     <button type="submit" class="btn btn-primary mt-3">Submit</button>
@@ -84,3 +112,6 @@
     </div>
 </section>
 @endsection
+@push('scripts')
+<script src="{{ asset('js/admin/admin-forms.js') }}"></script>
+@endpush

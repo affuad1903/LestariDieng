@@ -31,7 +31,7 @@
                             </section>
                             <section class="d-flex justify-content-start mt-4 mb-4">
                                 <i class="ri-group-line me-1"></i>
-                                <p>Kapasitas Maksimal {{ $paket->paket_detail }} Orang</p>
+                                <p>Kapasitas Minimal {{ $paket->paket_detail }} Orang</p>
                             </section>
                             <section class="toggleBtn px-3 d-flex justify-content-between my-2">
                                 <button>Destinasi </button>

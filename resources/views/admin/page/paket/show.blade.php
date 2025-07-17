@@ -159,8 +159,8 @@
                                 <div class="list-item d-flex align-items-start p-3 border-bottom">
                                     <i class="fas fa-clock me-2 text-warning mt-1"></i>
                                     <div>
-                                        <strong class="text-dark">{{ $item->dayItinerary->nama_hari ?? 'Hari tidak diset' }}</strong>
-                                        <span class="text-muted">- {{ \Carbon\Carbon::parse($item->timeItinerary->waktu ?? '00:00')->format('H:i') }}</span>
+                                        <strong class="text-dark">{{ $item->day ?? 'Hari tidak diset' }}</strong>
+                                        <span class="text-muted">- {{ \Carbon\Carbon::parse($item->time ?? '00:00')->format('H:i') }}</span>
                                         <p class="mb-0 mt-1">{{ $item->detail }}</p>
                                     </div>
                                 </div>
