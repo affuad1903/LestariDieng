@@ -25,7 +25,7 @@
                                 <h3>{{ $paket->paket_title }}</h3>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
                             <div class="d-flex align-items-center mb-3">
                                 <i class="ri-timer-2-line me-2"></i>
                                 <p class="mb-0">{{ $paket->paket_sub_title_date }}</p>
@@ -34,7 +34,7 @@
                                 <i class="ri-group-line me-2"></i>
                                 <p class="mb-0">Kapasitas Maksimal {{ $paket->paket_detail }} Orang</p>
                             </div>
-                            <a href="{{ url('/paket-detail/' . $paket->id) }}" class="btn-detail">Lihat Paket</a>
+                            <a href="{{ url('/paket-show/' . $paket->id) }}" class="btn-detail text-center">Lihat Paket</a>
                         </div>
                     </div>
                 </article>

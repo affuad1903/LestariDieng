@@ -115,6 +115,10 @@
     object-fit: cover;
 }
 
+.custom-footerLink a {
+    word-break: break-word;
+}
+
 .custom-footerLink{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;

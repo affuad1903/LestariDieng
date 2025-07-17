@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Home;
 use App\Models\Paket;
+use App\Models\Galery;
 use App\Models\Review;
 use App\Models\Destination;
 use Illuminate\Http\Request;
@@ -24,11 +25,13 @@ class PageController extends Controller
         ]);
     }
     public function destinasiIndex(){
+        $home = Home::with(['socialMedias', 'legalities', 'contacts'])->first();
         $destination = Destination::all();
-        return view('page.destinasi.index', compact('destination'));
+        return view('page.destinasi.index', compact('destination', 'home'));
     }
     public function destinasiShow($id)
     {
+        $home = Home::with(['socialMedias', 'legalities', 'contacts'])->first();
         $destination = Destination::with(['destination_section', 'destination_uniq'])->findOrFail($id);
         $destinationAll = Destination::where('id', '!=', $id)->get();
         if ($destinationAll->count() < 4) {
@@ -38,17 +41,21 @@ class PageController extends Controller
         }
 
         return view('page.destinasi.show', [
+
             'destination' => $destination,
+            'home' => $home,
             'destinationAll' => $destinationAll,
             'randomDestination' => $randomDestination,
         ]);
     }
     public function paketIndex(){
+        $home = Home::with(['socialMedias', 'legalities', 'contacts'])->first();
         $pakets = Paket::all();
-        return view('page.paket.index', compact('pakets'));
+        return view('page.paket.index', compact('pakets','home'));
     }
     public function paketShow($id)
     {
+        $home = Home::with(['socialMedias', 'legalities', 'contacts'])->first();
         $paket = Paket::with(['daftar_destinasi', 'daftar_fasilitas', 'detailItinerary'])->findOrFail($id);
 
         // group by day, lalu sort by time di masing-masing group
@@ -58,22 +65,23 @@ class PageController extends Controller
 
         return view('page.paket.show', [
             'paket' => $paket,
+            'home' => $home,
             'groupedItinerary' => $groupedItinerary,
         ]);
     }
     public function galeriIndex(){
-        return view('page.galery.index');
+        $home = Home::with(['socialMedias', 'legalities', 'contacts'])->first();
+        $galeries = Galery::with('galery_img')->get();
+        return view('page.galery.index', compact('home', 'galeries'));
     }
-    public function galeriShow(){
-        return view('page.galery.show');
-    }
-    public function paketJeepIndex(){
-        return view('page.paketJeep.index');
-    }
-    public function paketJeepShow(){
-        return view('page.paketJeep.show');
+    public function galeriShow($id)
+    {
+        $home = Home::with(['socialMedias', 'legalities', 'contacts'])->first();
+        $galery = Galery::with('galery_img')->findOrFail($id);
+        return view('page.galery.show', compact('galery','home'));
     }
     public function kontakIndex(){
-        return view('page.kontak.index');
+        $home = Home::with(['socialMedias', 'legalities', 'contacts'])->first();
+        return view('page.kontak.index',compact('home'));
     }
 }

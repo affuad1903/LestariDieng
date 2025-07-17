@@ -15,9 +15,6 @@
             <a class="nav-link custom-navlink {{ Request::is('paket-index') ? 'actived' : '' }}" href="{{url('/paket-index')}}">Paket Wisata</a>
         </li>
         <li class="nav-item custom-nav mb-4">
-          <a class="nav-link custom-navlink {{ Request::is('paket-jeep-index') ? 'actived' : '' }}" href="{{url('/paket-jeep-index')}}">Paket Jeep</a>
-        </li>
-        <li class="nav-item custom-nav mb-4">
           <a class="nav-link custom-navlink {{ Request::is('galeri-index') ? 'actived' : '' }}" href="{{url('/galeri-index')}}">Galeri</a>
         </li>
         <li class="nav-item custom-nav mb-4">

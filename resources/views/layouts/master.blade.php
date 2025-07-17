@@ -9,14 +9,14 @@
         content="Wisata Dieng, Candi Dieng, Wisata Wonosobo, Dataran Tinggi Dieng, Destinasi Wisata Indonesia">
     <meta name="author" content="Affandi Putra Pradana">
     <meta name="robots" content="index, follow">
-    <link rel="icon" type="image/png" href="{{ asset('image/logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('image/home/'.$home->logo) }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Open Graph (Facebook, WhatsApp) -->
     <meta property="og:title" content="Lestari Wisata Dieng - Keindahan Alam">
     <meta property="og:description"
         content="Jelajahi keindahan Dieng, dari Candi Dieng hingga panorama alam yang memukau di Wonosobo.">
-    <meta property="og:image" content="{{ asset('image/head.jpg') }}">
+    <meta property="og:image" content="{{ asset('image/home/'.$home->hero_image) }}">
     <meta property="og:url" content="https://www.namadomain.com/wisata-dieng">
     <meta property="og:type" content="website">
 
@@ -25,7 +25,7 @@
     <meta name="twitter:title" content="Wisata Dieng - Keindahan Alam">
     <meta name="twitter:description"
         content="Jelajahi keindahan Dieng, dari Candi Dieng hingga panorama alam yang memukau di Wonosobo.">
-    <meta name="twitter:image" content="{{ asset('image/head.jpg') }}">
+    <meta name="twitter:image" content="{{ asset('image/home/'.$home->hero_image) }}">
 
 
     <title>@yield('title')</title>

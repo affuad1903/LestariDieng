@@ -21,30 +21,25 @@
     {{-- Section --}}
     <div class="container-fluid">
         <section class="row custom-containerContentGaleri" id="galeri">
+            @foreach($galeries as $galeri)
             <section class="col-sm-6 col-md-4 col-lg-4 col-xl-3">
-                <div class="text-white galeri-img columnContent" onclick="onclickGaleri(this)" onmouseover="mouseOverGaleri(this)"  onmouseout="mouseOutGaleri(this)"  style="background: url('{{ asset('/image/head.jpg') }}') center/cover no-repeat; height: 300px;">
-                    <h2 class="fw-bold galeri-title uppercase">Kantor notaris santi dan rekan</h2>
-                    <button class="px-3 py-1 mt-3 rounded-pill showButton"><a href="{{url('/galeri-show')}}">Lihat Detail</a></button>
+                @php
+                    $firstImage = $galeri->galery_img->first();
+                    $imageUrl = $firstImage ? asset('image/galery/' . $galeri->id . '/' . $firstImage->image) : asset('image/default.jpg');
+                @endphp
+                <div class="text-white galeri-img columnContent text-center"
+                    onclick="onclickGaleri(this)" 
+                    onmouseover="mouseOverGaleri(this)" 
+                    onmouseout="mouseOutGaleri(this)"
+                    style="background: url('{{ $imageUrl }}') center/cover no-repeat; height: 300px;">
+                    
+                    <h2 class="fw-bold galeri-title uppercase">{{ $galeri->title }}</h2>
+                    <button class="px-3 py-1 mt-3 rounded-pill showButton">
+                        <a href="{{ route('galeryshow', $galeri->id) }}">Lihat Detail</a>
+                    </button>
                 </div>
             </section>
-            <section class="col-sm-6 col-md-4 col-lg-4 col-xl-3">
-                <div class="text-white galeri-img columnContent"onclick="onclickGaleri(this)" onmouseover="mouseOverGaleri(this)"  onmouseout="mouseOutGaleri(this)" style="background: url('{{ asset('/image/head.jpg') }}') center/cover no-repeat; height: 300px;">
-                    <h2 class="fw-bold galeri-title uppercase">Kantor notaris santi dan rekan</h2>
-                    <button class="px-3 py-1 mt-3 rounded-pill showButton"><a href="">Lihat Detail</a></button>
-                </div>
-            </section>
-            <section class="col-sm-6 col-md-4 col-lg-4 col-xl-3">
-                <div class="text-white galeri-img columnContent"onclick="onclickGaleri(this)" onmouseover="mouseOverGaleri(this)"  onmouseout="mouseOutGaleri(this)" style="background: url('{{ asset('/image/head.jpg') }}') center/cover no-repeat; height: 300px;">
-                    <h2 class="fw-bold galeri-title uppercase">Kantor notaris santi dan rekan</h2>
-                    <button class="px-3 py-1 mt-3 rounded-pill showButton"><a href="">Lihat Detail</a></button>
-                </div>
-            </section>
-            <section class="col-sm-6 col-md-4 col-lg-4 col-xl-3">
-                <div class="text-white galeri-img columnContent"onclick="onclickGaleri(this)" onmouseover="mouseOverGaleri(this)"  onmouseout="mouseOutGaleri(this)" style="background: url('{{ asset('/image/head.jpg') }}') center/cover no-repeat; height: 300px;">
-                    <h2 class="fw-bold galeri-title uppercase">Kantor notaris santi dan rekan</h2>
-                    <button class="px-3 py-1 mt-3 rounded-pill showButton"><a href="">Lihat Detail</a></button>
-                </div>
-            </section>
+            @endforeach
         </section>
     </div>
     {{-- /Section --}}

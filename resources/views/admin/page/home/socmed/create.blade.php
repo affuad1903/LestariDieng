@@ -53,14 +53,15 @@
                             'required' => true,
                             'placeholder' => '----- Pilih Ikon Platform -----',
                             'options' => [
-                                'fab fa-facebook-f' => 'Facebook',
-                                'fab fa-instagram' => 'Instagram',
-                                'fab fa-twitter' => 'Twitter',
-                                'fab fa-youtube' => 'YouTube',
-                                'fab fa-linkedin-in' => 'LinkedIn',
-                                'fab fa-tiktok' => 'TikTok',
-                                'fab fa-whatsapp' => 'WhatsApp'
-                            ],
+                                'ri-facebook-fill'     => 'Facebook',
+                                'ri-instagram-line'    => 'Instagram',
+                                'ri-twitter-x-line'    => 'Twitter',
+                                'ri-youtube-fill'      => 'YouTube',
+                                'ri-linkedin-box-line' => 'LinkedIn',
+                                'ri-tiktok-line'       => 'TikTok',
+                                'ri-whatsapp-line'     => 'WhatsApp',
+                            ]
+,
                             'help_text' => 'Ikon akan otomatis dipilih sesuai platform yang dipilih'
                         ])
 

@@ -120,8 +120,7 @@
             <section class="row text-center">
                 <div class="col-12">
                     <a href="{{ url('/paket-index') }}">
-                        <button class="rounded-pill text-center custom-borderContent responsive-text-content">Lihat Semua
-                            Paket</button>
+                        <button class="rounded-pill text-center custom-borderContent responsive-text-content">Lihat SemuaPaket</button>
                     </a>
                 </div>
             </section>

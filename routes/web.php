@@ -46,7 +46,7 @@ Route::get('/paket-show/{id}', [PageController::class, 'paketShow'])->name('pake
 Route::get('/paket-jeep-index', [PageController::class,'paketJeepIndex']);
 Route::get('/paket-jeep-show', [PageController::class,'paketJeepShow']);
 Route::get('/galeri-index', [PageController::class,'galeriIndex']);
-Route::get('/galeri-show', [PageController::class,'galeriShow']);
+Route::get('/galeri-show/{id}', [PageController::class, 'galeriShow'])->name('galeryshow');
 Route::get('/kontak-index', [PageController::class,'kontakIndex']);
 
 // Public Review Routes

@@ -27,7 +27,7 @@
             <div class="mb-3 col-sm-12 col-md-12 col-lg-6 d-flex align-items-center">
                 <img class="shadow rounded" src="{{ asset('/image/destination/' . $destination->thumbnail_image) }}"
                     alt="{{$destination->title}}"
-                    loading="lazy">
+                    loading="lazy" style="max-height: 500px;">
             </div>
             @php
                 $firstSection = $destination->destination_section->first();
