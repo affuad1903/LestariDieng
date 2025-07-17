@@ -29,26 +29,12 @@
                     @csrf
                     
                     <!-- Destination Selection -->
-                    <div class="form-group">
-                        <label for="destination_id" class="form-label">
-                            <i class="mdi mdi-map-marker me-2"></i>Pilih Destinasi
-                        </label>
-                        <select class="form-select @error('destination_id') is-invalid @enderror" 
-                                name="destination_id" 
-                                id="destination_id" required>
-                            <option value="">--- Pilih Destinasi ---</option>
-                            @foreach ($destination as $item)
-                                <option value="{{ $item->id }}" {{ old('destination_id') == $item->id ? 'selected' : '' }}>
-                                    {{ $item->content_title }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('destination_id')
-                            <div class="admin-error-message">
-                                <i class="mdi mdi-alert-circle"></i>{{ $message }}
-                            </div>
-                        @enderror
-                    </div>
+                    <input type="hidden" name="destination_id" value="{{ $selected_id }}">
+<p class="mb-3">
+    <i class="mdi mdi-map-marker me-2"></i>
+    Destinasi: <strong>{{ $destination->firstWhere('id', $selected_id)?->content_title ?? 'Tidak Ditemukan' }}</strong>
+</p>
+
 
                     <!-- Title -->
                     <div class="form-group">
@@ -87,13 +73,13 @@
                         @enderror
                     </div>
 
-                    <!-- Form Actions -->
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="mdi mdi-content-save me-2"></i>Simpan Konten
+                    {{-- Submit Button --}}
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-register text-white">
+                            <i class="fas fa-save me-2"></i>Simpan Data
                         </button>
-                        <a href="/dashboard/destinasi" class="btn btn-secondary">
-                            <i class="mdi mdi-arrow-left me-2"></i>Kembali
+                        <a href="/dashboard/paket" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Kembali
                         </a>
                     </div>
                 </form>

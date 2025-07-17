@@ -11,11 +11,17 @@ class DestinationSectionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         $destination = Destination::all();
-        return view('admin.page.destinasi.section.create',['destination'=>$destination]);
+        $selected_id = $request->get('destination_id');
+
+        return view('admin.page.destinasi.section.create', [
+            'destination' => $destination,
+            'selected_id' => $selected_id
+        ]);
     }
+
 
     /**
      * Store a newly created resource in storage.

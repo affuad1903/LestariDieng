@@ -2,30 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Home;
 use App\Models\Paket;
+use App\Models\Review;
 use App\Models\Destination;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
     public function homeIndex(){
+        $home = Home::with(['socialMedias', 'legalities', 'contacts'])->first();
         $destination = Destination::where('is_main_page', true)->get();
         $pakets = Paket::where('is_main_page', true)->get();
+        $reviews = Review::latest()->take(6)->get(); 
 
         return view('page.home', [
-            'pakets' => $pakets,          // ini variabel yg betul
+            'home' => $home,
+            'pakets' => $pakets,
             'destinations' => $destination,
+            'reviews' => $reviews,
         ]);
-
     }
     public function destinasiIndex(){
         $destination = Destination::all();
         return view('page.destinasi.index', compact('destination'));
     }
-    public function destinasiShow($id){
+    public function destinasiShow($id)
+    {
         $destination = Destination::with(['destination_section', 'destination_uniq'])->findOrFail($id);
-        $destinationAll = Destination::all();
-        return view('page.destinasi.show', compact('destination', 'destinationAll'));
+        $destinationAll = Destination::where('id', '!=', $id)->get();
+        if ($destinationAll->count() < 4) {
+            $randomDestination = Destination::all()->shuffle()->take(4);
+        } else {
+            $randomDestination = $destinationAll->shuffle()->take(4);
+        }
+
+        return view('page.destinasi.show', [
+            'destination' => $destination,
+            'destinationAll' => $destinationAll,
+            'randomDestination' => $randomDestination,
+        ]);
     }
     public function paketIndex(){
         $pakets = Paket::all();
@@ -44,7 +60,7 @@ class PageController extends Controller
             'paket' => $paket,
             'groupedItinerary' => $groupedItinerary,
         ]);
-        }
+    }
     public function galeriIndex(){
         return view('page.galery.index');
     }

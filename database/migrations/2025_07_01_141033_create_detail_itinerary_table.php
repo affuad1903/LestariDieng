@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('detail_itinerary', function (Blueprint $table) {
             $table->id();
             $table->foreignId('paket_id')->constrained('paket')->onDelete('cascade');
-            $table->foreignId('day_itinerary_id')->constrained('day_itinerary')->onDelete('cascade');
-            $table->foreignId('time_itinerary_id')->constrained('time_itinerary')->onDelete('cascade');
-            $table->text('detail'); 
+            $table->unsignedTinyInteger('day');
+            $table->string('time', 10);         
+            $table->text('detail');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

@@ -9,19 +9,17 @@ use Illuminate\Support\Facades\File;
 
 class DestinationUniqController extends Controller
 {
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(Request $request)
     {
         $destination = Destination::all();
-        return view('admin.page.destinasi.uniq.create',['destination'=>$destination]);
+        $selected_id = $request->get('destination_id', old('destination_id'));
+
+        return view('admin.page.destinasi.uniq.create', [
+            'destination' => $destination,
+            'selected_id' => $selected_id
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -31,7 +29,7 @@ class DestinationUniqController extends Controller
                     $fail('Judul maksimal 3 kata.');
                 }
             }],
-            'uniq_sub_title' =>['max:255', function ($attribute, $value, $fail) {
+            'uniq_sub_title' => ['max:255', function ($attribute, $value, $fail) {
                 if (str_word_count($value) > 3) {
                     $fail('Sub Judul maksimal 3 kata.');
                 }
@@ -47,33 +45,31 @@ class DestinationUniqController extends Controller
             'uniq_image.mimes' => 'Thumbnail harus berformat JPG, JPEG, atau PNG.',
             'uniq_image.max' => 'Ukuran thumbnail maksimal 2MB.',
         ]);
-        // Upload image
-        $thumbImageName = time().'_uniq.'.$request->file('uniq_image')->extension();
-        $request->file('uniq_image')->move(public_path('image/destination/uniq'), $thumbImageName);
-    
 
+        // Upload image
+        $thumbImageName = time() . '_uniq.' . $request->file('uniq_image')->extension();
+        $request->file('uniq_image')->move(public_path('image/destination/uniq'), $thumbImageName);
+
+        // Simpan ke database
         $destination_uniq = new DestinationUniq;
-        $destination_uniq->destination_id =  $request->input('destination_id');
-        $destination_uniq->uniq_title = $request->input('uniq_title');
-        $destination_uniq->uniq_sub_title = $request->input('uniq_sub_title');
-        $destination_uniq->uniq_detail = $request->input('uniq_detail');
-        $destination_uniq->uniq_image = $thumbImageName ;
+        $destination_uniq->destination_id = $request->destination_id;
+        $destination_uniq->uniq_title = $request->uniq_title;
+        $destination_uniq->uniq_sub_title = $request->uniq_sub_title;
+        $destination_uniq->uniq_detail = $request->uniq_detail;
+        $destination_uniq->uniq_image = $thumbImageName;
         $destination_uniq->save();
-        $destinationId = $destination_uniq->destination_id;
-        return redirect()->route('destinasi.show', $destinationId)->with('success', 'Data berhasil ditambahkan!');
+
+        return redirect()->route('destinasi.show', $destination_uniq->destination_id)
+                         ->with('success', 'Data berhasil ditambahkan!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $destination_uniq = DestinationUniq::findOrFail($id);
-        //hapus foto lama
-        File::delete('image/destination/uniq/'.$destination_uniq->uniq_image);
-
+        File::delete('image/destination/uniq/' . $destination_uniq->uniq_image);
         $destinationId = $destination_uniq->destination_id;
         $destination_uniq->delete();
+
         return redirect()->route('destinasi.show', $destinationId)->with('success', 'Data berhasil dihapus!');
     }
 }

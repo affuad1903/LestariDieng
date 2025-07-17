@@ -8,25 +8,26 @@
     <div class="row container-footer">
         <section class="col-sm-6 mb-4">
             <div class="row" >
-                <img src="{{ asset('image/logo.png') }}" class="img-fluid object-contain" alt="Logo Lestari Wisata Dieng" style="max-width: 200px; height: auto;">
+                <img src="{{ asset('image/home/'.$home->logo) }}" class="img-fluid object-contain" alt="Logo {{$home->title}}" style="max-width: 200px; height: auto;">
             </div>
-            <p class="row mt-4 text-white ">tag line</p>
+            <p class="row mt-4 text-white text-center text-md-start">{{$home->tag_line}}</p>
         </section>
         <section class="col-sm-6">
             <div class="row">
                 <section class="col-sm-12 col-md-12 col-lg-6 col-xl-4 text-white mb-4">
                     <h2 class="row fs-4 fw-bold mb-3">Kontak</h2>
                     <ul class="custom-ul">
+                        @forelse ($home->contacts as $item)
                         <li class="custom-footerLink">
-                            <a href="">
-                                <i class="ri-whatsapp-line"></i> (+62) 813-3980-4842
+                            <a href="{{ $item->url }}" class="text-decoration-none text-white">
+                                <i class="{{$item->icon}}"></i> {{$item->detail}}
                             </a>
                         </li>
+                        @empty
                         <li class="custom-footerLink">
-                            <a href="">
-                                <i class="ri-mail-line"></i> example@gmail.com
-                            </a>
+                            <i class="ri-close-line"></i>Belum ada data yang ditambahkan
                         </li>
+                        @endforelse
                     </ul>
                 </section>
                 <section class="col-sm-12 col-md-12 col-lg-6 col-xl-4 text-white mb-4">
@@ -62,7 +63,7 @@
             </div>
         </section>
         <section class="col-sm-12 text-center text-white">
-            <p class="responsive-text-content">&copy;Copyright 2025 Lestari Wisata Dieng &VerticalSeparator; Powered By </p>
+            <p class="responsive-text-content">&copy;Copyright {{ date('Y') }} {{$home->title}} &VerticalSeparator; Powered By </p>
         </section>
     </div>
 </section>

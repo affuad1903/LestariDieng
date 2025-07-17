@@ -3,10 +3,10 @@
     <div class="d-flex align-items-center justify-content-between ">
       <section class="d-flex items-center">
         <!-- LOGO -->
-        <img src="{{ asset('image/logo.png') }}" 
+        <img src="{{ asset('image/home/'.$home->logo) }}" 
         class="img-fluid me-3"
-        alt="Logo Lestari Wisata Dieng - Agen Tour Dieng" 
-        title="Lestari Wisata Dieng"
+        alt="Logo {{$home->title}} - Agen Tour Dieng" 
+        title="{{$home->title}}"
         itemprop="logo"
         loading="lazy"
         style="max-width: 60px; height: auto;"> 
@@ -14,7 +14,7 @@
         <!-- HEADER TITLE -->
         <a href="{{ url('/') }}" class="text-decoration-none flex-grow-1 text-center">
           <h1 id="header-title" class="fw-bold text-uppercase m-0 responsive-text" itemprop="name">
-            Lestari Wisata Dieng
+            {{$home->title}}
           </h1>
         </a>
       </section>

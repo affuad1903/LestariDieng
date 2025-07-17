@@ -202,9 +202,7 @@
                         @else
                             <div class="alert alert-light text-center">
                                 <i class="fas fa-info-circle text-muted mb-2" style="font-size: 2rem;"></i>
-                                <p class="text-muted mb-0">Belum ada destinasi yang tersedia. 
-                                    <a href="{{ route('daftar-d.create') }}" class="alert-link">Tambah destinasi baru</a>
-                                </p>
+                                <p class="text-muted mb-0 ms-1">Belum ada destinasi yang tersedia.</p>
                             </div>
                         @endif
                     </div>
@@ -269,9 +267,7 @@
                         @else
                             <div class="alert alert-light text-center">
                                 <i class="fas fa-info-circle text-muted mb-2" style="font-size: 2rem;"></i>
-                                <p class="text-muted mb-0">Belum ada fasilitas yang tersedia. 
-                                    <a href="{{ route('daftar-fasilitas.create') }}" class="alert-link">Tambah fasilitas baru</a>
-                                </p>
+                                <p class="text-muted mb-0 ms-1">Belum ada fasilitas yang tersedia.</p>
                             </div>
                         @endif
                     </div>

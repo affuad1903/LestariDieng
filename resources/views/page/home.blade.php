@@ -1,17 +1,22 @@
 @extends('layouts.master')
 
-@section('title', 'Lestari Wisata Dieng - Keindahan Alam Wisata Dieng')
-@section('meta_description',
-    'Jelajahi wisata Dieng yang penuh pesona, dari Candi Dieng hingga panorama alam yang
-    memukau di Wonosobo.')
+@section('title')
+    {{ $home->title }} - Keindahan Alam Wisata Dieng
+@endsection
+@section('meta_description')
+    Jelajahi wisata {{ $home->title }} yang penuh pesona, dari Candi Dieng hingga panorama alam yang
+    memukau di Wonosobo.
+@endsection
+
 @section('content')
+@php use Illuminate\Support\Str; @endphp
     {{-- Jumbotron --}}
     <section class="container-fluid p-0">
         <header class="d-flex justify-content-center align-items-center text-white text-center"
-            style="background: url('{{ asset('/image/head.jpg') }}') center/cover no-repeat; height: 570px;">
+            style="background: url('{{ asset('/image/home/'.$home->hero_image) }}') center/cover no-repeat; height: 570px;">
             <div class="overlay w-100 h-100" style="background: rgba(0, 0, 0, 0.5);"></div>
             <div class="position-absolute">
-                <h2 class="responsive-text fw-bold">Selamat Datang di Lestari Wisata Dieng</h2>
+                <h2 class="responsive-text fw-bold">Selamat Datang di {{$home->title}}</h2>
                 <a href="{{ url('/paket-index') }}"><button
                         class="border mt-4 rounded-pill border-white text-center custom-borderHead responsive-text-content">Lihat
                         Paket</button></a>
@@ -82,19 +87,10 @@
 
         {{-- Card --}}
         <section class="container-fluid container-section custom-background">
-            {{-- Header --}}
-            <header class="row mb-4">
-                <h2 class="text-center fw-bold custom-contentHeader">
-                    Paket Wisata Dieng
-                    <script>
-                        document.write(new Date().getFullYear());
-                    </script>
-                </h2>
-            </header>
             {{-- Card --}}
             <section class="row container-section justify-content-center">
                 @foreach ($pakets->take(3) as $paket)
-                    <article class="col-md-4 col-sm-12 mb-4">
+                    <article class="col-md-6 col-lg-4 col-sm-12 mb-4">
                         <div class="custom-card">
                             <div class="card-image-wrapper">
                                 <img src="{{ asset('/image/paket/' . $paket->paket_image) }}"
@@ -104,7 +100,7 @@
                                     <h3>{{ $paket->paket_title }}</h3>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body d-flex flex-column">
                                 <div class="d-flex align-items-center mb-3">
                                     <i class="ri-timer-2-line me-2"></i>
                                     <p class="mb-0">{{ $paket->paket_sub_title_date }}</p>
@@ -113,7 +109,7 @@
                                     <i class="ri-group-line me-2"></i>
                                     <p class="mb-0">Kapasitas Maksimal {{ $paket->paket_detail }} Orang</p>
                                 </div>
-                                <a href="{{ url('/paket-detail/' . $paket->id) }}" class="btn-detail">Lihat Paket</a>
+                                <a href="{{ url('/paket-show/' . $paket->id) }}" class="btn-detail text-center">Lihat Paket</a>
                             </div>
                         </div>
                     </article>
@@ -130,9 +126,7 @@
                 </div>
             </section>
         </section>
-
         {{-- /Card --}}
-
     </section>
     {{-- Paket Wisata --}}
 
@@ -144,131 +138,37 @@
         </header>
         {{-- /Header --}}
         {{-- Card Review --}}
-        <section class="overflow d-flex py-4">
-            <article class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 mt-2 mx-2">
-                <div class="card custom-cardShadow custom-background ">
-                    <div class="card-body">
-                        <header class="d-flex justify-content-between">
-                            <div class="row me-1">
-                                <div class="d-inline-flex">
-                                    <section class="custom-reviewContainerImg">
-                                        <img src="{{ asset('image/profil.jpg') }}" alt="">
-                                    </section>
-                                    <section class="ms-2 custom-reviewName">
-                                        <h3>Affandi Putra Pradana</h3>
-                                        <time>2022-12-2</time>
-                                    </section>
+        <section class="row justify-content-center py-4">
+            @forelse ($reviews as $review)
+                <article class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card custom-cardShadow custom-background h-100">
+                        <div class="card-body">
+                            <header class="mb-2">
+                                <h5 class="fw-bold">{{ $review->nama }}</h5>
+                                <time class="text-muted small">{{ $review->created_at->format('d M Y') }}</time>
+                            </header>
+                            <hr class="my-2">
+                            <section>
+                                <div class="mb-2">
+                                    @for ($i = 0; $i < $review->bintang; $i++)
+                                        <i class="ri-star-fill text-warning"></i>
+                                    @endfor
+                                    @for ($i = $review->bintang; $i < 5; $i++)
+                                        <i class="ri-star-line text-muted"></i>
+                                    @endfor
                                 </div>
-                            </div>
-                        </header>
-                        <hr class="my-3">
-                        <section class="row">
-                            <p>saya sangat puas sekali dalam perjalanan ini</p>
-                        </section>
+                               <p class="responsive-text-content mb-0"> {{ Str::words(strip_tags($review->isi_review), 15, '...') }}
+</p>
+                            </section>
+                        </div>
                     </div>
-                </div>
-            </article>
-            <article class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 mt-2 mx-2">
-                <div class="card custom-cardShadow custom-background ">
-                    <div class="card-body">
-                        <header class="d-flex justify-content-between">
-                            <div class="row me-1">
-                                <div class="d-inline-flex">
-                                    <section class="custom-reviewContainerImg">
-                                        <img src="{{ asset('image/profil.jpg') }}" alt="">
-                                    </section>
-                                    <section class="ms-2 custom-reviewName">
-                                        <h3>Affandi Putra Pradana</h3>
-                                        <time>2022-12-2</time>
-                                    </section>
-                                </div>
-                            </div>
-                        </header>
-                        <hr class="my-3">
-                        <section class="row">
-                            <p>saya sangat puas sekali dalam perjalanan ini</p>
-                        </section>
-                    </div>
-                </div>
-            </article>
-            <article class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 mt-2 mx-2">
-                <div class="card custom-cardShadow custom-background ">
-                    <div class="card-body">
-                        <header class="d-flex justify-content-between">
-                            <div class="row me-1">
-                                <div class="d-inline-flex">
-                                    <section class="custom-reviewContainerImg">
-                                        <img src="{{ asset('image/profil.jpg') }}" alt="">
-                                    </section>
-                                    <section class="ms-2 custom-reviewName">
-                                        <h3>Affandi Putra Pradana</h3>
-                                        <time>2022-12-2</time>
-                                    </section>
-                                </div>
-                            </div>
-                        </header>
-                        <hr class="my-3">
-                        <section class="row">
-                            <p>saya sangat puas sekali dalam perjalanan ini</p>
-                        </section>
-                    </div>
-                </div>
-            </article>
-            <article class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 mt-2 mx-2">
-                <div class="card custom-cardShadow custom-background ">
-                    <div class="card-body">
-                        <header class="d-flex justify-content-between">
-                            <div class="row me-1">
-                                <div class="d-inline-flex">
-                                    <section class="custom-reviewContainerImg">
-                                        <img src="{{ asset('image/profil.jpg') }}" alt="">
-                                    </section>
-                                    <section class="ms-2 custom-reviewName">
-                                        <h3>Affandi Putra Pradana</h3>
-                                        <time>2022-12-2</time>
-                                    </section>
-                                </div>
-                            </div>
-                        </header>
-                        <hr class="my-3">
-                        <section class="row">
-                            <p>saya sangat puas sekali dalam perjalanan ini</p>
-                        </section>
-                    </div>
-                </div>
-            </article>
-            <article class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 mt-2 mx-2">
-                <div class="card custom-cardShadow custom-background ">
-                    <div class="card-body">
-                        <header class="d-flex justify-content-between">
-                            <div class="row me-1">
-                                <div class="d-inline-flex">
-                                    <section class="custom-reviewContainerImg">
-                                        <img src="{{ asset('image/profil.jpg') }}" alt="">
-                                    </section>
-                                    <section class="ms-2 custom-reviewName">
-                                        <h3>Affandi Putra Pradana</h3>
-                                        <time>2022-12-2</time>
-                                    </section>
-                                </div>
-                            </div>
-                        </header>
-                        <hr class="my-3">
-                        <section class="row">
-                            <p>saya sangat puas sekali dalam perjalanan ini</p>
-                        </section>
-                    </div>
-                </div>
-            </article>
-        </section>
-        <section class="row">
-            <h2 class="text-center fw-bold custom-contentHeader">Review Perjalanan Kamu</h2>
-            <form action="">
-                <textarea style="height: 100px;" class="border border-2 form-control mb-2 responsive-text-content" name=""
-                    id=""></textarea>
-            </form>
+                </article>
+            @empty
+                <p class="text-center">Belum ada review yang tersedia saat ini.</p>
+            @endforelse
         </section>
         {{-- /Card Review --}}
     </section>
-    {{-- Review --}}
+    {{-- /Review --}}
+
 @endsection

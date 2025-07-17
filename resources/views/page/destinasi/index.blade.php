@@ -34,7 +34,8 @@
                     </div>
                 </article>
             @endforeach
-        </section> {{-- /Card --}}
+        </section> 
+        {{-- /Card --}}
     </section>
 
 @endsection

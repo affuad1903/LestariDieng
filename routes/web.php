@@ -42,7 +42,7 @@ Route::get('/', [PageController::class,'homeIndex']);
 Route::get('/destinasi-index', [PageController::class,'destinasiIndex']);
 Route::get('/destinasi-show/{id}', [PageController::class,'destinasiShow']);
 Route::get('/paket-index', [PageController::class,'paketIndex']);
-Route::get('/paket-show/{id}', [PageController::class, 'paketShow']);
+Route::get('/paket-show/{id}', [PageController::class, 'paketShow'])->name('paket.show');
 Route::get('/paket-jeep-index', [PageController::class,'paketJeepIndex']);
 Route::get('/paket-jeep-show', [PageController::class,'paketJeepShow']);
 Route::get('/galeri-index', [PageController::class,'galeriIndex']);
